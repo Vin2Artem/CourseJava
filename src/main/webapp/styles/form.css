@@ -1,0 +1,104 @@
+form {
+    padding: 8px;
+}
+
+form p {
+    margin: 16px 0;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=date],
+textarea,
+.select {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 3px;
+    position: relative;
+    font-size: 13px;
+}
+
+textarea {
+	max-width: 100%;
+	min-width: 100%;
+}
+
+.select {
+    cursor: pointer;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=tel]:focus,
+input[type=password]:focus,
+input[type=date]:focus,
+textarea:focus,
+.select:focus {
+    background-color: #ddd;
+    outline: 2px solid rgb(230, 205, 120);
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px auto;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    opacity: 0.9;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}
+
+.container {
+    max-width: 550px;
+    margin: auto;
+}
+
+.completed {
+    outline: 2px solid #4CAF50;
+}
+
+.uncompleted {
+    outline: 2px solid red;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.pop_field {
+    margin-bottom: 0 !important;
+}
+
+.pop_msg {
+    width: 100%;
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px 0 6px 0;
+    text-align: center;
+    visibility: hidden;
+}

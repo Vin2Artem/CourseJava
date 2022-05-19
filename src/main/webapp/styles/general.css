@@ -1,0 +1,41 @@
+:root {
+    --primary-background-color: white;
+    --primary-color: #3a99d8;
+    --primary-hover-color: #298dcf;
+    --neutral-elements-color: #99a7c0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background-color: #f1f2f4;
+    font-family: "Ubuntu", sans-serif;
+}
+
+textarea {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+a {
+    color: var(--primary-color);
+    transition: all linear 0.3s 0s;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.right {
+    margin-left: auto;
+}

@@ -1,0 +1,291 @@
+aside {
+    width: 285px;
+    min-width: 265px;
+    margin-right: 20px;
+}
+
+img {
+    width: 100%;
+}
+
+main {
+    max-width: 800px;
+    width: 100%;
+}
+
+header {
+    background-color: var(--primary-background-color);
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+footer {
+    background-color: var(--primary-background-color);
+    margin-top: 20px;
+}
+
+.btn_account {
+    padding: 20px 30px;
+    color: #1B1D1E;
+    display: flex;
+    text-decoration: none;
+}
+
+.btn_account > span {
+    white-space: nowrap;
+    border-bottom: 1px dashed var(--neutral-elements-color);
+}
+
+.btn_account:hover {
+    background-color: var(--primary-hover-color);
+    color: white;
+}
+
+.btn_feedback {
+    padding: 20px 30px;
+    white-space: nowrap;
+}
+
+.btn_account:hover > span {
+    border-bottom: none;
+}
+
+.account {
+    width: min-content;
+}
+
+.exit_fol {
+    width: 20px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.exit_fol > img {
+    transform: rotate(90deg);
+}
+
+.feedback {
+    margin: 0 0 0 auto;
+    width: min-content;
+}
+
+.head_desc {
+    display: flex;
+    padding: 20px;
+    background-color: var(--primary-background-color);
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-weight: 400;
+    color: black;
+}
+
+.welcome_text {
+    flex: 1 1 auto;
+    color: var(--neutral-elements-color);
+    margin-right: 10px;
+}
+
+.welcome_social {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.social {
+    width: 50px
+}
+
+.main {
+    padding: 30px;
+    background-color: var(--primary-background-color);
+}
+
+.desc {
+    margin-top: 20px;
+    line-height: 2;
+}
+
+.courses > li {
+    list-style-type: none;
+}
+
+.course {
+    margin: 20px 0;
+}
+
+.course_name {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-background-color);
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.course_name:hover {
+    background-color: var(--primary-hover-color);
+    color: white;
+}
+
+.secondimg {
+    opacity: 1;
+    transition: all linear 0.3s 0s;
+    position: absolute;
+}
+
+.firstimg {
+    opacity: 0;
+    transition: all linear 0.3s 0s;
+    position: absolute;
+}
+
+.course_name:hover .secondimg {
+    opacity: 0;
+}
+
+.course_name:hover .firstimg {
+    opacity: 1;
+}
+
+.btn_account:hover .secondimg {
+    opacity: 0;
+}
+
+.btn_account:hover .firstimg {
+    opacity: 1;
+}
+
+.course_fol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    position: relative;
+    width: 20px;
+}
+
+.course_fol > img {
+    transform: rotate(-90deg);
+}
+
+.welcome_logo {
+    display: none;
+    margin-right: 20px;
+}
+
+.welcome_text {
+    display: flex;
+}
+
+.welcome_img {
+    width: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+.menu_img {
+    display: none;
+}
+
+@media only screen and (max-width: 970px) {
+    .menu {
+        display: block;
+        background-color: var(--primary-background-color);
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+
+    .menu > :checked ~ .courses {
+        max-height: 1000px;
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transition: all linear 0.5s 0s;
+    }
+
+    .menu > :checked ~ .menu_img {
+        transform: rotate(180deg);
+        transition: all linear 0.3s 0s;
+        transform-origin: 50% 60%;
+    }
+
+    .courses {
+        max-height: 0;
+        opacity: 0;
+        visibility: collapse;
+        transition: all linear 0.5s 0s;
+    }
+
+    .menu_img {
+        width: 35px;
+        display: block;
+        margin: 0 auto -10px;
+        padding-top: 10px;
+        transition: all linear 0.3s 0s;
+    }
+
+    .d-logo {
+        display: none;
+    }
+
+    .welcome_logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    aside {
+        margin: 0;
+        width: 100%;
+    }
+
+    main {
+        max-width: none;
+    }
+
+    input.search_input {
+        margin: 0 10px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .content {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .head_desc {
+        flex-direction: column;
+    }
+
+    .welcome_text {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .welcome_img {
+        width: 100px;
+    }
+
+    .welcome_social {
+        flex-direction: row;
+        margin-top: 20px;
+    }
+
+    .welcome_logo {
+        flex-direction: row;
+        margin: 0 0 20px 0;
+    }
+}

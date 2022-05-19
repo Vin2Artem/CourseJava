@@ -1,0 +1,25 @@
+.search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.search-fol {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-background-color);
+    padding: 10.5px;
+}
+input.search_input {
+    margin: 0;
+    font-size: 15px;
+    padding: 10px;
+}
+.search_img {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
