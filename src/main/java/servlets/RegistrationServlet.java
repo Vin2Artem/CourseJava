@@ -42,11 +42,13 @@ public class RegistrationServlet extends HttpServlet {
             }
             // Captcha check
             req.setCharacterEncoding("UTF-8");
-            String right = session.getAttribute("answer").toString();
-            String given = req.getParameter("answer").toString();
-            if (!right.equals(given)) {
-                req.setAttribute("title", "Ошибка регистрации");
-                req.setAttribute("message", "Каптча введена неверно!");
+            String right, given;
+            try {
+                right = session.getAttribute("answer").toString();
+                given = req.getParameter("answer");
+            } catch (Exception e) {
+                req.setAttribute("title", "Ошибка входа");
+                req.setAttribute("message", "У вас заблокированы файлы cookie. Для корректной работы портала необходимо их разблокировать.");
                 req.getRequestDispatcher(JSP_ERROR).forward(req, resp);
                 return;
             }
