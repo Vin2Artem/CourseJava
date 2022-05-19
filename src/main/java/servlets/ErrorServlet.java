@@ -12,11 +12,25 @@ public class ErrorServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher(JSP_ERROR).forward(req, resp);
+        error(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        error(req, resp);
+    }
+
+    private void error(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String type = req.getParameter("type");
+        if (type != null && type.equals("js")) {
+            req.setAttribute("title", "JavaScript");
+            req.setAttribute("message", "У вас в браузере отключён JavaScript. Для корректной работы портала необходимо его включить.");
+        }
+        String redir = req.getParameter("redir");
+        if (redir != null) {
+            req.setAttribute("redir", redir);
+        }
         req.getRequestDispatcher(JSP_ERROR).forward(req, resp);
     }
 }

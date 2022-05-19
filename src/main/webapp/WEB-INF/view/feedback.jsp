@@ -1,8 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ru">
 
 <head>
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=error?type=js&redir=/feedback">
+    </noscript>
     <meta charset="UTF-8">
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +48,7 @@
             <div class="head_desc">
                 <div class="welcome_text">
                     <div class="welcome_logo">
-                        <a href="welcome">
+                        <a href="main">
                             <img class="welcome_img" src="pictures/logo.png" alt="Logo"/>
                         </a>
                     </div>

@@ -1,8 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ru">
 
 <head>
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=error?type=js&redir=/main">
+    </noscript>
     <meta charset="UTF-8">
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +23,9 @@
 
 <body>
 <div class="content">
-    <jsp:include page="samples/aside.jsp" />
+    <jsp:include page="samples/aside.jsp"/>
     <main>
-        <jsp:include page="samples/header.jsp" />
+        <jsp:include page="samples/header.jsp"/>
         <div class="main_content">
             <div class="head_desc">
                 <div class="welcome_text">
@@ -47,15 +50,13 @@
                     <img src="pictures/welcome.png" alt="Welcome">
                 </a>
                 <div class="desc">
-                    <strong>
-                        <p>Контакты:</p>
-                        <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
-                        <p><a href="mailto:mail@upgr.com">mail@upgr.com<br></a></p>
-                    </strong>
+                    <p><strong>Контакты:</strong></p>
+                    <p><<strong><a href="tel:+74951234567">+7 (495) 123-45-67</a></strong></p>
+                    <p><strong><a href="mailto:mail@upgr.com">mail@upgr.com<br></a></strong></p>
                 </div>
             </div>
         </div>
-        <jsp:include page="samples/footer.jsp" />
+        <jsp:include page="samples/footer.jsp"/>
     </main>
 </div>
 </body>

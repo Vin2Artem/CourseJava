@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ru">
 
 <head>
@@ -15,6 +15,6 @@
 </head>
 <body>
     <span><c:out value="${message}" default="Непредвиденная ошибка. Повторите позднее"/></span>
-    <input type="button" onclick="history.back();" value="Назад"/>
+    <a href="<c:out value="${redir}" default="javascript:history.back()"/>">Назад</a>
 </body>
 </html>
