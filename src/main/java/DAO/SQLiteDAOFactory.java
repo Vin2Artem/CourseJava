@@ -5,7 +5,7 @@ import org.sqlite.JDBC;
 import java.sql.*;
 
 public class SQLiteDAOFactory extends DAOFactory {
-    private static final String DBURL= "jdbc:sqlite:C:/databases/myfin.db";
+    private static final String DBURL= "jdbc:sqlite:../databases/myfin.db";
     private static Connection connection = null;
 
     public static Connection getConnection() throws SQLException {
