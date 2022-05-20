@@ -45,24 +45,7 @@
     <main>
         <jsp:include page="samples/header.jsp" />
         <div class="main_content">
-            <div class="head_desc">
-                <div class="welcome_text">
-                    <div class="welcome_logo">
-                        <a href="main">
-                            <img class="welcome_img" src="pictures/logo.png" alt="Logo"/>
-                        </a>
-                    </div>
-                    <div>
-                        <h1>Upgrader</h1>
-                        <p>Онлайн-школа по личностному развитию и финансам</p>
-                    </div>
-                </div>
-                <div class="welcome_social">
-                    <a href="https://youtube.com/" target="_blank">
-                        <img src="pictures/youtube.png" alt="Social" class="social">
-                    </a>
-                </div>
-            </div>
+            <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
                 <form action="" method="post">
                     <div class="container signup">

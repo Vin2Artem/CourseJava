@@ -27,31 +27,14 @@
     <main>
         <jsp:include page="samples/header.jsp"/>
         <div class="main_content">
-            <div class="head_desc">
-                <div class="welcome_text">
-                    <div class="welcome_logo">
-                        <a href="welcome">
-                            <img class="welcome_img" src="pictures/logo.png" alt="Logo"/>
-                        </a>
-                    </div>
-                    <div>
-                        <h1>Upgrader</h1>
-                        <p>Онлайн-школа по личностному развитию и финансам</p>
-                    </div>
-                </div>
-                <div class="welcome_social">
-                    <a href="https://youtube.com/" target="_blank">
-                        <img src="pictures/youtube.png" alt="Social" class="social">
-                    </a>
-                </div>
-            </div>
+            <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
                 <a href="https://upgrader.com/" target="_blank">
                     <img src="pictures/welcome.png" alt="Welcome">
                 </a>
                 <div class="desc">
                     <p><strong>Контакты:</strong></p>
-                    <p><<strong><a href="tel:+74951234567">+7 (495) 123-45-67</a></strong></p>
+                    <p><strong><a href="tel:+74951234567">+7 (495) 123-45-67</a></strong></p>
                     <p><strong><a href="mailto:mail@upgr.com">mail@upgr.com<br></a></strong></p>
                 </div>
             </div>
