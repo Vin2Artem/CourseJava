@@ -56,7 +56,7 @@
             </div>
 
             <label for="birth" class="bold">Дата рождения</label>
-            <input type="date" min="1900-01-01" max="<c:out value="${today}"/>" id="birth" name="birth" required>
+            <input type="date" min="1900-01-01" max="<c:out value="${requestScope.today}"/>" id="birth" name="birth" required>
 
             <hr>
 
@@ -88,14 +88,14 @@
 
             <hr>
 
-            <label for="answer" class="bold"><c:out value="${question}"/></label>
+            <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
             <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
 
             <button type="submit" class="registerbtn">Зарегистрироваться</button>
         </div>
 
         <div class="container signin">
-            <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+            <p>Уже есть аккаунт? <a href="login">Войти</a></p>
         </div>
     </form>
 </div>

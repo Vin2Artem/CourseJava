@@ -33,7 +33,7 @@
     }
 </style>
 
-<c:if test="${success == 1}">
+<c:if test="${requestScope.success == 1}">
     <script>
         alert("Успешно отправлено!");
     </script>
@@ -57,7 +57,7 @@
 
                         <hr>
 
-                        <label for="answer" class="bold"><c:out value="${question}"/></label>
+                        <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
                         <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
 
                         <button type="submit" class="registerbtn">Отправить</button>

@@ -40,14 +40,14 @@
 
             <hr>
 
-            <label for="answer" class="bold"><c:out value="${question}"/></label>
+            <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
             <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
 
             <button type="submit" class="registerbtn">Войти</button>
         </div>
 
         <div class="container signin">
-            <p>Нет аккаунта? <a href="/registration">Зарегистрироваться</a></p>
+            <p>Нет аккаунта? <a href="registration">Зарегистрироваться</a></p>
         </div>
     </form>
 </div>

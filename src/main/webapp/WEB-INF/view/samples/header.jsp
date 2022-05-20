@@ -12,7 +12,7 @@
     </div>
     <div class="account right">
         <a href="main/account" class="btn_account">
-            <span><c:out value="${user.email}"/></span>
+            <span><c:out value="${sessionScope.user.email}"/></span>
         </a>
     </div>
 </header>
