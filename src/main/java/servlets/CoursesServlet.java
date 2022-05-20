@@ -33,7 +33,13 @@ public class CoursesServlet extends HttpServlet {
             resp.sendRedirect(url_login);
             return;
         }
-        MyLog.Msg(req.getRequestURI());
+        String uri = req.getRequestURI().substring(9);
+        if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
+            MyLog.Msg("-"+uri);
+            resp.sendRedirect(url_login);
+            return;
+        }
+        MyLog.Msg("+"+uri);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_student).forward(req, resp);
     }
