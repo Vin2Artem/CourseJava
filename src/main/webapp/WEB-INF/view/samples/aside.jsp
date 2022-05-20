@@ -16,11 +16,11 @@
                     <div class="course">
                         <div class="search">
                             <div class="search-fol">
-                                <input id="inp_search" type="text" class="search_input" placeholder="Введите текст для поиска">
+                                <input id="inp_search" type="text" class="search_input"
+                                       placeholder="Введите текст для поиска">
+                                <label for="inp_search"></label>
                                 <div class="search_img">
-                                    <label for="inp_search">
-                                        <img src="<c:url value="/pictures/search.png" />" alt="Search">
-                                    </label>
+                                    <img src="<c:url value="/pictures/search.png" />" alt="Search">
                                 </div>
                             </div>
                         </div>

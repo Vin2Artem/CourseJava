@@ -9,6 +9,7 @@ aside {
 }
 
 #lbl_menu {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -209,6 +210,10 @@ h1 {
 }
 
 @media only screen and (max-width: 970px) {
+    #lbl_menu {
+        display: block;
+    }
+
     .menu {
         display: block;
         background-color: var(--primary-background-color);
