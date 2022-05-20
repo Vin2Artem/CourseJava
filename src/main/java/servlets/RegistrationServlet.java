@@ -52,6 +52,12 @@ public class RegistrationServlet extends HttpServlet {
                 req.getRequestDispatcher(JSP_ERROR).forward(req, resp);
                 return;
             }
+            if (!right.equals(given)) {
+                req.setAttribute("title", "Ошибка входа");
+                req.setAttribute("message", "Каптча введена неверно!");
+                req.getRequestDispatcher(JSP_ERROR).forward(req, resp);
+                return;
+            }
             // If OK
             session.removeAttribute("answer");
             session.removeAttribute("question");
@@ -67,8 +73,7 @@ public class RegistrationServlet extends HttpServlet {
                     req.getParameter("email"),
                     BCrypt.hashpw(req.getParameter("pwd"), BCrypt.gensalt(12)),
                     req.getParameter("tel"),
-                    req.getParameter("city"),
-                    req.getParameter("street"));
+                    req.getParameter("city"));
             int id = userDAO.insertUser(user);
             if (id == userDAO.INSERT_ERROR) {
                 req.setAttribute("title", "Ошибка регистрации");

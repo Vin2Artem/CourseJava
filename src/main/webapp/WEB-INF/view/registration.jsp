@@ -86,9 +86,6 @@
             <label for="city" class="bold">Город *</label>
             <input type="text" placeholder="Москва" id="city" name="city" required>
 
-            <label for="street" class="bold">Улица, дом</label>
-            <input type="text" placeholder="Ленина, 31" id="street" name="street">
-
             <hr>
 
             <label for="answer" class="bold"><c:out value="${question}"/></label>

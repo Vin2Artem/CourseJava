@@ -17,7 +17,7 @@ public class SQLiteUserDAO implements UserDAO {
 
             PreparedStatement pStatement = connection.prepareStatement(
                     "INSERT INTO users(`surname`, `name`, `patronymic`, `sex`, `birth`, `email`," +
-                            "`password`, `phone`, `city`, `street`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            "`password`, `phone`, `city`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pStatement.setObject(1, user.getSurname());
             pStatement.setObject(2, user.getName());
             pStatement.setObject(3, user.getPatronymic());
@@ -27,7 +27,6 @@ public class SQLiteUserDAO implements UserDAO {
             pStatement.setObject(7, user.getPassword());
             pStatement.setObject(8, user.getPhone());
             pStatement.setObject(9, user.getCity());
-            pStatement.setObject(10, user.getStreet());
             pStatement.execute();
 
             Statement statement = connection.createStatement();
@@ -85,8 +84,7 @@ public class SQLiteUserDAO implements UserDAO {
                 resultSet.getString("email"),
                 resultSet.getString("password"),
                 resultSet.getString("phone"),
-                resultSet.getString("city"),
-                resultSet.getString("street")
+                resultSet.getString("city")
             );
             if (BCrypt.checkpw(password, user.getPassword())) {
                 return user;
@@ -116,8 +114,7 @@ public class SQLiteUserDAO implements UserDAO {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getString("phone"),
-                        resultSet.getString("city"),
-                        resultSet.getString("street")
+                        resultSet.getString("city")
                 );
                 lst.add(user);
             }
