@@ -14,11 +14,11 @@
     <meta content='width' name='MobileOptimized'/>
     <meta content='yes' name='apple-mobile-web-app-capable'/>
     <title>Главная</title>
-    <link rel="shortcut icon" href="pictures/logo.png" type="image/png">
-    <link rel="stylesheet" href="styles/general.css"/>
-    <link rel="stylesheet" href="styles/main.css"/>
-    <link rel="stylesheet" href="styles/form.css"/>
-    <link rel="stylesheet" href="styles/search.css"/>
+    <link rel="shortcut icon" href="<c:url value="/pictures/logo.png"/>" type="image/png">
+    <link rel="stylesheet" href="<c:url value="/styles/general.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/styles/main.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/styles/form.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/styles/search.css" />"/>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
                 <a href="https://upgrader.com/" target="_blank">
-                    <img src="pictures/welcome.png" alt="Welcome">
+                    <img src="<c:url value="/pictures/welcome.png" />" alt="Welcome">
                 </a>
                 <div class="desc">
                     <p><strong>Контакты:</strong></p>

@@ -4,6 +4,20 @@ aside {
     margin-right: 20px;
 }
 
+.menu {
+    position: relative;
+}
+
+#lbl_menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    height: 55px;
+    z-index: 1;
+}
+
 img {
     width: 100%;
 }
@@ -199,7 +213,6 @@ h1 {
         display: block;
         background-color: var(--primary-background-color);
         margin-bottom: 20px;
-        cursor: pointer;
     }
 
     .menu > :checked ~ .courses {
