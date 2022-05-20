@@ -22,7 +22,7 @@
 
 <body>
 <div class="content">
-    <form action="#" method="post" onsubmit="return validateForm();">
+    <form action="" method="post" onsubmit="return validateForm();">
         <div class="container signup">
             <div>
                 <img class="logo" src="<c:url value="/pictures/logo.png"/>" alt="Logo">
