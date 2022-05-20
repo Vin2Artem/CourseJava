@@ -30,6 +30,7 @@ public class RegistrationServlet extends HttpServlet {
         Captcha captcha = new Captcha();
         session.setAttribute("question", captcha.getQuestion());
         session.setAttribute("answer", captcha.getAnswer());
+        req.setAttribute("today", java.time.LocalDate.now());
         getServletContext().getRequestDispatcher(JSP_REGISTRATION).forward(req, resp);
     }
 
