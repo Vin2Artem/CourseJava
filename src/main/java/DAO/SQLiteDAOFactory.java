@@ -23,4 +23,8 @@ public class SQLiteDAOFactory extends DAOFactory {
     public FeedbackDAO getFeedbackDAO() {
         return new SQLiteFeedbackDAO();
     }
+
+    public SQLiteLessonDAO getLessonDAO() {
+        return new SQLiteLessonDAO();
+    }
 }

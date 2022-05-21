@@ -45,7 +45,7 @@
         flex: 0 0 auto;
     }
 
-    .lesson_desk {
+    .lesson_desc {
         width: 100%;
     }
 
@@ -73,21 +73,18 @@
                     <thead>
                     <tr>
                         <th class="lesson_name">Название</th>
-                        <th class="lesson_desk">Краткое описание</th>
+                        <th class="lesson_desc">Краткое описание</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="lesson_name">Введение</td>
-                        <td class="lesson_desk">Структура курса, формат его проведения и основные правила.</td>
-                        <td class="lesson_go"><a href="barsik" class="btn_positive">Открыть</a></td>
-                    </tr>
-                    <tr>
-                        <td class="lesson_name">Ставим цель</td>
-                        <td class="lesson_desk">Правила постановки цели. Как получить максимальный результат от курса?</td>
-                        <td class="lesson_go"><a href="barsik" class="btn_positive">Открыть</a></td>
-                    </tr>
+                    <c:forEach var="lesson" items="${requestScope.lessons}">
+                        <tr>
+                            <td class="lesson_name"><c:out value="${lesson.name}" /></td>
+                            <td class="lesson_desc"><c:out value="${lesson.desc}" /></td>
+                            <td class="lesson_go"><a href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />" class="btn_positive">Открыть</a></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
