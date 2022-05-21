@@ -43,7 +43,7 @@
             <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
             <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
 
-            <button type="submit" class="registerbtn">Войти</button>
+            <button type="submit" class="btn_positive">Войти</button>
         </div>
 
         <div class="container signin">

@@ -62,7 +62,7 @@ hr {
     margin-bottom: 25px;
 }
 
-.registerbtn {
+.btn_positive {
     background-color: #4CAF50;
     color: white;
     padding: 16px 20px;
@@ -77,7 +77,7 @@ hr {
     border-radius: 5px;
 }
 
-.registerbtn:hover {
+.btn_positive:hover {
     opacity: 1;
 }
 

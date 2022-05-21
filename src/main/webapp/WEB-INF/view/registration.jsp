@@ -47,12 +47,13 @@
             <label for="sexb" class="bold">Пол</label>
             <div class="select" id="sexb" tabindex="1">
                 <input type="text" id="sex" name="sex" value="мужской" class="hidden"/>
+                <label for="sex"></label>
                 <span class="select_value">мужской</span>
                 <ul class="select_dropdown">
                     <li class="select_option">мужской</li>
                     <li class="select_option">женский</li>
                 </ul>
-                <img class="arrow" src="pictures/arrow.png">
+                <img class="arrow" src="pictures/arrow.png" alt="Max">
             </div>
 
             <label for="birth" class="bold">Дата рождения</label>
@@ -91,7 +92,7 @@
             <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
             <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
 
-            <button type="submit" class="registerbtn">Зарегистрироваться</button>
+            <button type="submit" class="btn_positive">Зарегистрироваться</button>
         </div>
 
         <div class="container signin">
