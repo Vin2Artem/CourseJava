@@ -13,6 +13,7 @@ import java.io.IOException;
 public class CoursesServlet extends HttpServlet {
 
     private static final String jsp_student = "/WEB-INF/view/main.jsp";
+    private static final String jsp_courses = "/WEB-INF/view/courses.jsp";
     private static final String url_login = "/login";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,12 +36,10 @@ public class CoursesServlet extends HttpServlet {
         }
         String uri = req.getRequestURI().substring(9);
         if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
-            MyLog.Msg("-"+uri);
             resp.sendRedirect(url_login);
             return;
         }
-        MyLog.Msg("+"+uri);
         // Add 2nd group (admin)
-        req.getRequestDispatcher(jsp_student).forward(req, resp);
+        req.getRequestDispatcher(jsp_courses).forward(req, resp);
     }
 }
