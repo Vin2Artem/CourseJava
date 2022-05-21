@@ -28,6 +28,16 @@
         }
     }
 
+    h2 {
+        text-align: center;
+    }
+
+    .course_desc {
+        margin: 15px;
+        text-indent: 1em;
+        line-height: 1.5;
+    }
+
     thead {
         display: block;
         width: auto;
@@ -41,8 +51,9 @@
     }
 
     .lesson_name {
-        width: 150px;
+        width: 160px;
         flex: 0 0 auto;
+        word-break: break-word;
     }
 
     .lesson_desc {
@@ -53,11 +64,17 @@
         margin: 0;
         padding: 10px;
         text-decoration: none;
+        width: 100px;
+        text-align: center;
+    }
+
+    div.btn_positive {
+        background: gray;
     }
 
     td,
     th{
-        padding: 15px 15px 15px 10px;
+        padding: 15px;
     }
 </style>
 
@@ -69,10 +86,14 @@
         <div class="main_content">
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
+                <h2>Название курса</h2>
+                <div class="course_desc">
+                    <p>Описание курса</p>
+                </div>
                 <table>
                     <thead>
                     <tr>
-                        <th class="lesson_name">Название</th>
+                        <th class="lesson_name">Урок</th>
                         <th class="lesson_desc">Краткое описание</th>
                         <th></th>
                     </tr>
@@ -82,7 +103,12 @@
                         <tr>
                             <td class="lesson_name"><c:out value="${lesson.name}" /></td>
                             <td class="lesson_desc"><c:out value="${lesson.desc}" /></td>
-                            <td class="lesson_go"><a href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />" class="btn_positive">Открыть</a></td>
+                            <c:if test="${lesson.daysToUnlock <= 0}">
+                                <td class="lesson_go"><a href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />" class="btn_positive">Открыть</a></td>
+                            </c:if>
+                            <c:if test="${lesson.daysToUnlock > 0}">
+                                <td class="lesson_go"><div class="btn_positive"><c:out value="${lesson.daysToUnlock}" /> дн.</div></td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>

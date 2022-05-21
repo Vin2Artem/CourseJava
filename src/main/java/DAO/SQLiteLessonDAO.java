@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class SQLiteLessonDAO implements LessonDAO {
@@ -35,15 +37,22 @@ public class SQLiteLessonDAO implements LessonDAO {
                     "SELECT * FROM lessons WHERE course = ?");
             pStatement.setObject(1, courseId);
             ResultSet resultSet = pStatement.executeQuery();
+
+            long currentNum = 0;
+            LocalDate now = java.time.LocalDate.now();
+            LocalDate start = LocalDate.parse(foundUserCourse.getStartDate());
             while (resultSet.next()) {
+                LocalDate unlockDate = start.plusDays(currentNum*Lesson.PERIOD);
                 Lesson lesson = new Lesson(
                         resultSet.getInt("id"),
                         resultSet.getInt("course"),
                         resultSet.getString("name"),
                         resultSet.getString("desc"),
-                        resultSet.getString("url")
+                        resultSet.getString("url"),
+                        ChronoUnit.DAYS.between(now, unlockDate)
                         );
                 lst.add(lesson);
+                currentNum++;
             }
             return lst;
         } catch (SQLException e) {
