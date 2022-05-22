@@ -22,12 +22,7 @@
 </head>
 
 <style>
-    .main {
-        padding-top: 0;
-    }
-
     h2 {
-        padding-top: 25px;
         text-align: center;
     }
 
@@ -80,19 +75,13 @@
         padding: 15px;
     }
 
-    @media only screen and (max-width: 450px) {
-        .main {
-            padding: 0;
-        }
-    }
-
     @media only screen and (max-width: 750px) {
         .main {
-            padding: 0;
+            padding: 30px 0;
         }
 
         table {
-            padding: 0 15px 15px;
+            padding: 0 15px;
         }
 
         thead {

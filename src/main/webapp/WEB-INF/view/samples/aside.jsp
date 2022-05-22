@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <aside>
     <div class="d-logo">
-        <a href="main">
+        <a href="<c:url value="/main" />">
             <img class="logo" src="<c:url value="/pictures/logo.png" />" alt="Logo"/>
         </a>
     </div>

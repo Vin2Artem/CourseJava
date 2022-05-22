@@ -22,12 +22,7 @@
 </head>
 
 <style>
-    .main {
-        padding-top: 0;
-    }
-
     h2 {
-        padding-top: 25px;
         text-align: center;
     }
 
@@ -53,24 +48,18 @@
         background: gray;
     }
 
-    td,
-    th {
-        padding: 15px;
-    }
-
-    @media only screen and (max-width: 450px) {
-        .main {
-            padding: 0;
-        }
+    iframe {
+        margin: auto;
+        display: block;
+        max-width: 560px;
+        max-height: 315px;
+        width: 90vw;
+        height: 50vw;
     }
 
     @media only screen and (max-width: 750px) {
         .main {
-            padding: 0;
-        }
-
-        .btn_positive {
-            margin: 3px auto 8px;
+            padding: 30px 0;
         }
     }
 </style>
@@ -87,7 +76,12 @@
                 <div class="lesson_desc">
                     <c:out value="${requestScope.lesson.desc}"/>
                 </div>
-
+                <div>
+                    <iframe src="<c:out value="${requestScope.lesson.url}"/>"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
             </div>
         </div>
         <jsp:include page="samples/footer.jsp"/>

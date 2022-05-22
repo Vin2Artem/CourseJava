@@ -21,6 +21,18 @@
     <link rel="stylesheet" href="<c:url value="/styles/search.css" />"/>
 </head>
 
+<style>
+    .btn_positive {
+        margin: 10px auto 0;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+        line-height: 1.5;
+        max-width: 250px;
+        white-space: break-spaces;
+    }
+</style>
+
 <body>
 <div class="content">
     <jsp:include page="samples/aside.jsp"/>
@@ -37,6 +49,11 @@
                     <p><strong><a href="tel:+74951234567">+7 (495) 123-45-67</a></strong></p>
                     <p><strong><a href="mailto:mail@upgr.com">mail@upgr.com<br></a></strong></p>
                 </div>
+
+                <c:if test="${requestScope.last_lesson != null}">
+                    <a href="<c:url value="/lessons/" /><c:out value="${requestScope.last_lesson}" />"
+                            class="btn_positive">К последнему просмотренному уроку</a>
+                </c:if>
             </div>
         </div>
         <jsp:include page="samples/footer.jsp"/>

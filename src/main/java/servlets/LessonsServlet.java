@@ -6,10 +6,7 @@ import models.Lesson;
 import models.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 public class LessonsServlet extends HttpServlet {
@@ -52,6 +49,13 @@ public class LessonsServlet extends HttpServlet {
             resp.sendRedirect(url_student);
             return;
         }
+        /* set last lesson cookie */
+        Cookie last_lesson = new Cookie("last_lesson", String.valueOf(lesson.getId()));
+        /* 30 days */
+        last_lesson.setMaxAge(60*60*24*30);
+        last_lesson.setPath("/");
+        resp.addCookie(last_lesson);
+
         req.setAttribute("lesson", lesson);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_courses).forward(req, resp);
