@@ -59,13 +59,10 @@ public class CoursesServlet extends HttpServlet {
 
         /* get lessons */
         LessonDAO lessonDAO = sqLiteDAOFactory.getLessonDAO();
-        ArrayList<Lesson> lst = lessonDAO.getLessonsOfCourse(user.getId(), courseId);
+        ArrayList<Lesson> lst = lessonDAO.getLessonsOfCourse(user, courseId);
         if (lst == null) {
             resp.sendRedirect(url_student);
             return;
-        }
-        for (Lesson lesson : lst) {
-            MyLog.Msg(lesson.toString());
         }
         req.setAttribute("lessons", lst);
         // Add 2nd group (admin)

@@ -1,6 +1,7 @@
 package DAO;
 
 import models.Lesson;
+import models.User;
 
 import java.util.ArrayList;
 
@@ -11,9 +12,9 @@ public interface LessonDAO {
     //boolean deleteUserCourse(int id);
     //boolean updateUserCourse(UserCourse userCourse);
     //UserCourse findUserCourse(int userId);
-    ArrayList<Lesson> getLessonsOfCourse(int userId, int courseId);
-    Lesson getLessonById(int userId, int lessonId);
-    Lesson getNextAvailableLesson(int userId, Lesson lesson);
-    Lesson getPrevAvailableLesson(int userId, Lesson lesson);
+    ArrayList<Lesson> getLessonsOfCourse(User user, int courseId);
+    Lesson getLessonById(User user, int lessonId);
+    Lesson getNextAvailableLesson(User user, Lesson lesson);
+    Lesson getPrevAvailableLesson(User user, Lesson lesson);
     //ArrayList<UserCourse> getAllUserCourses();
 }

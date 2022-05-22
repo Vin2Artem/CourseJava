@@ -26,6 +26,15 @@
         text-align: center;
     }
 
+    .desc_edit {
+        font-size: 16px;
+        line-height: 1.5;
+        min-height: 250px;
+        margin: 15px;
+        min-width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
+
     .course_desc {
         margin: 15px;
         text-indent: 1em;
@@ -34,6 +43,10 @@
 
     .course_desc > p {
         margin: 7px 0;
+    }
+
+    table {
+        width: 100%;
     }
 
     thead {
@@ -117,11 +130,18 @@
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
                 <h2>Курс "<c:out value="${requestScope.course.name}"/>"</h2>
-                <div class="course_desc">
-                    <c:forEach var="string" items="${requestScope.course.desc}">
-                        <p><c:out value="${string}"/></p>
-                    </c:forEach>
-                </div>
+                <c:if test="${sessionScope.user.editor == true}">
+                    <textarea id="area_desk" class="desc_edit"><c:forEach var="string" items="${requestScope.course.desc}"><c:out
+                            value="${string}"/></c:forEach></textarea>
+                    <label for="area_desk"></label>
+                </c:if>
+                <c:if test="${sessionScope.user.editor == false}">
+                    <div class="course_desc">
+                        <c:forEach var="string" items="${requestScope.course.desc}">
+                            <p><c:out value="${string}"/></p>
+                        </c:forEach>
+                    </div>
+                </c:if>
                 <table>
                     <thead>
                     <tr>
@@ -135,12 +155,12 @@
                         <tr>
                             <td class="lesson_name"><c:out value="${lesson.name}"/></td>
                             <td class="lesson_desc"><c:out value="${lesson.desc}"/></td>
-                            <c:if test="${lesson.daysToUnlock <= 0}">
+                            <c:if test="${lesson.isUnlocked(sessionScope.user) == true}">
                                 <td class="lesson_go"><a
                                         href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />"
                                         class="btn_positive">Открыть</a></td>
                             </c:if>
-                            <c:if test="${lesson.daysToUnlock > 0}">
+                            <c:if test="${lesson.isUnlocked(sessionScope.user) == false}">
                                 <td class="lesson_go">
                                     <div class="btn_positive"><c:out value="${lesson.daysToUnlock}"/> дн.</div>
                                 </td>

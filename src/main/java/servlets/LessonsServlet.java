@@ -43,7 +43,7 @@ public class LessonsServlet extends HttpServlet {
         /* get course */
         SQLiteDAOFactory sqLiteDAOFactory = new SQLiteDAOFactory();
         LessonDAO lessonDAO = sqLiteDAOFactory.getLessonDAO();
-        Lesson lesson = lessonDAO.getLessonById(user.getId(), lessonId);
+        Lesson lesson = lessonDAO.getLessonById(user, lessonId);
         /* if lesson is not found */
         if (lesson == null) {
             resp.sendRedirect(url_student);
@@ -51,7 +51,7 @@ public class LessonsServlet extends HttpServlet {
         }
         int courseId = lesson.getCourse();
         /* if lesson is unavailable */
-        if (lesson.getDaysToUnlock() > 0) {
+        if (!lesson.isUnlocked(user)) {
             resp.sendRedirect("/course/" + courseId);
             return;
         }
@@ -62,9 +62,9 @@ public class LessonsServlet extends HttpServlet {
         last_lesson.setPath("/");
         resp.addCookie(last_lesson);
 
-        req.setAttribute("prevId", lessonDAO.getPrevAvailableLesson(user.getId(), lesson).getId());
+        req.setAttribute("prevId", lessonDAO.getPrevAvailableLesson(user, lesson).getId());
         req.setAttribute("courseId", courseId);
-        req.setAttribute("nextId", lessonDAO.getNextAvailableLesson(user.getId(), lesson).getId());
+        req.setAttribute("nextId", lessonDAO.getNextAvailableLesson(user, lesson).getId());
         req.setAttribute("lesson", lesson);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_lessons).forward(req, resp);

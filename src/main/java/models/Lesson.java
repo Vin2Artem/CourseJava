@@ -77,4 +77,8 @@ public class Lesson {
     public void setDaysToUnlock(long daysToUnlock) {
         this.daysToUnlock = daysToUnlock;
     }
+
+    public boolean isUnlocked(User user) {
+        return getDaysToUnlock() <= 0 || user.getEditor();
+    }
 }

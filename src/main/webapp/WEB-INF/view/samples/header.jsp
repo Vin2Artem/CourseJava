@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <header>
     <div class="account">
-        <a href="exit" class="btn_account">
+        <a href="<c:url value="/exit"/>" class="btn_account">
             <div class="exit_fol">
                 <img class="firstimg" src="<c:url value="/pictures/arrow_white.png"/>" alt="Out">
                 <img class="secondimg" src="<c:url value="/pictures/arrow.png"/>" alt="Out">

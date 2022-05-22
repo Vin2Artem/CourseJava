@@ -1,6 +1,7 @@
 package DAO;
 
 import models.Lesson;
+import models.User;
 import models.UserCourse;
 
 import java.sql.Connection;
@@ -16,31 +17,34 @@ public class SQLiteLessonDAO implements LessonDAO {
         // инициализация
     }
 
-    public ArrayList<Lesson> getLessonsOfCourse(int userId, int courseId) {
+    public ArrayList<Lesson> getLessonsOfCourse(User user, int courseId) {
         try {
             ArrayList<Lesson> lst = new ArrayList<>();
-            UserCourse foundUserCourse = null;
-            SQLiteUserCourseDAO sqLiteUserCourseDAO = new SQLiteUserCourseDAO();
-            ArrayList<UserCourse> availableUserCourses = sqLiteUserCourseDAO.getAvailableUserCourses(userId);
-            for (UserCourse availableUserCourse : availableUserCourses) {
-                if (availableUserCourse.getCourse() == courseId) {
-                    foundUserCourse = availableUserCourse;
-                    break;
+            LocalDate now = java.time.LocalDate.now();
+            /* for editor all courses are opened today */
+            LocalDate start = now;
+            if (!user.getEditor()) {
+                UserCourse foundUserCourse = null;
+                SQLiteUserCourseDAO sqLiteUserCourseDAO = new SQLiteUserCourseDAO();
+                ArrayList<UserCourse> availableUserCourses = sqLiteUserCourseDAO.getAvailableUserCourses(user.getId());
+                for (UserCourse availableUserCourse : availableUserCourses) {
+                    if (availableUserCourse.getCourse() == courseId) {
+                        foundUserCourse = availableUserCourse;
+                        break;
+                    }
                 }
-            }
-            if (foundUserCourse == null) {
-                return null;
+                if (foundUserCourse == null) {
+                    return null;
+                }
+                start = LocalDate.parse(foundUserCourse.getStartDate());
             }
             Connection connection = SQLiteDAOFactory.getConnection();
-
             PreparedStatement pStatement = connection.prepareStatement(
                     "SELECT * FROM lessons WHERE course = ?");
             pStatement.setObject(1, courseId);
             ResultSet resultSet = pStatement.executeQuery();
 
             long currentNum = 0;
-            LocalDate now = java.time.LocalDate.now();
-            LocalDate start = LocalDate.parse(foundUserCourse.getStartDate());
             while (resultSet.next()) {
                 LocalDate unlockDate = start.plusDays(currentNum * Lesson.PERIOD);
                 Lesson lesson = new Lesson(
@@ -61,7 +65,7 @@ public class SQLiteLessonDAO implements LessonDAO {
         }
     }
 
-    public Lesson getLessonById(int userId, int lessonId) {
+    public Lesson getLessonById(User user, int lessonId) {
         try {
             Connection connection = SQLiteDAOFactory.getConnection();
             PreparedStatement pStatement = connection.prepareStatement(
@@ -81,7 +85,7 @@ public class SQLiteLessonDAO implements LessonDAO {
                     resultSet.getString("url"),
                     0
             );
-            ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(userId, lesson.getCourse());
+            ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(user, lesson.getCourse());
             for (Lesson l : lessonsOfCourse) {
                 if (l.getId() == lesson.getId()) {
                     lesson.setDaysToUnlock(l.getDaysToUnlock());
@@ -95,11 +99,11 @@ public class SQLiteLessonDAO implements LessonDAO {
         }
     }
 
-    public Lesson getNextAvailableLesson(int userId, Lesson lesson) {
-        ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(userId, lesson.getCourse());
+    public Lesson getNextAvailableLesson(User user, Lesson lesson) {
+        ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(user, lesson.getCourse());
         ArrayList<Lesson> availableLessons = new ArrayList<>();
         for (Lesson l : lessonsOfCourse) {
-            if (l.getDaysToUnlock() <= 0) {
+            if (l.isUnlocked(user)) {
                 availableLessons.add(l);
             }
         }
@@ -118,11 +122,11 @@ public class SQLiteLessonDAO implements LessonDAO {
         return null;
     }
 
-    public Lesson getPrevAvailableLesson(int userId, Lesson lesson) {
-        ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(userId, lesson.getCourse());
+    public Lesson getPrevAvailableLesson(User user, Lesson lesson) {
+        ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(user, lesson.getCourse());
         ArrayList<Lesson> availableLessons = new ArrayList<>();
         for (Lesson l : lessonsOfCourse) {
-            if (l.getDaysToUnlock() <= 0) {
+            if (l.isUnlocked(user)) {
                 availableLessons.add(l);
             }
         }
