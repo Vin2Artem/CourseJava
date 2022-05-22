@@ -13,7 +13,7 @@
     <meta content='true' name='HandheldFriendly'/>
     <meta content='width' name='MobileOptimized'/>
     <meta content='yes' name='apple-mobile-web-app-capable'/>
-    <title>Обратная связь</title>
+    <title><c:out value="${requestScope.course.name}"/></title>
     <link rel="shortcut icon" href="<c:url value="/pictures/logo.png" />" type="image/png">
     <link rel="stylesheet" href="<c:url value="/styles/general.css" />"/>
     <link rel="stylesheet" href="<c:url value="/styles/main.css" />"/>
@@ -104,7 +104,7 @@
         }
 
         th, td {
-            padding: 2.5px 0;
+            padding: 3px 0;
         }
 
         .lesson_name {
