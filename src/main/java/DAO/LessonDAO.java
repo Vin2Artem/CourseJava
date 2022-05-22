@@ -11,8 +11,7 @@ public interface LessonDAO {
     //boolean deleteUserCourse(int id);
     //boolean updateUserCourse(UserCourse userCourse);
     //UserCourse findUserCourse(int userId);
-    ArrayList<Lesson> getAvailableLessons(int userId, int courseId);
-    Lesson getAvailableLesson(int userId, int lessonId);
-    boolean isLessonAvailable(int userId, Lesson lesson);
+    ArrayList<Lesson> getLessonsOfCourse(int userId, int courseId);
+    Lesson getLessonById(int userId, int lessonId);
     //ArrayList<UserCourse> getAllUserCourses();
 }

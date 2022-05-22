@@ -59,7 +59,7 @@ public class CoursesServlet extends HttpServlet {
 
         /* get lessons */
         LessonDAO lessonDAO = sqLiteDAOFactory.getLessonDAO();
-        ArrayList<Lesson> lst = lessonDAO.getAvailableLessons(user.getId(), courseId);
+        ArrayList<Lesson> lst = lessonDAO.getLessonsOfCourse(user.getId(), courseId);
         if (lst == null) {
             resp.sendRedirect(url_student);
             return;

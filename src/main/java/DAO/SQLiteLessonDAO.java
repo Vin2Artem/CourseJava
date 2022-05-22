@@ -16,7 +16,7 @@ public class SQLiteLessonDAO implements LessonDAO {
         // инициализация
     }
 
-    public ArrayList<Lesson> getAvailableLessons(int userId, int courseId) {
+    public ArrayList<Lesson> getLessonsOfCourse(int userId, int courseId) {
         try {
             ArrayList<Lesson> lst = new ArrayList<>();
             UserCourse foundUserCourse = null;
@@ -61,7 +61,7 @@ public class SQLiteLessonDAO implements LessonDAO {
         }
     }
 
-    public Lesson getAvailableLesson(int userId, int lessonId) {
+    public Lesson getLessonById(int userId, int lessonId) {
         try {
             Connection connection = SQLiteDAOFactory.getConnection();
             PreparedStatement pStatement = connection.prepareStatement(
@@ -81,29 +81,17 @@ public class SQLiteLessonDAO implements LessonDAO {
                     resultSet.getString("url"),
                     0
             );
-            if (isLessonAvailable(userId, lesson)) {
-                return lesson;
+            ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(userId, lesson.getCourse());
+            for (Lesson l : lessonsOfCourse) {
+                if (l.getId() == lesson.getId()) {
+                    lesson.setDaysToUnlock(l.getDaysToUnlock());
+                    break;
+                }
             }
-            return null;
+            return lesson;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public boolean isLessonAvailable(int userId, Lesson lesson) {
-        ArrayList<Lesson> availableLessons = getAvailableLessons(userId, lesson.getCourse());
-        for (Lesson lesson1 : availableLessons) {
-            if (lesson1.getId() == lesson.getId()) {
-                long days = lesson1.getDaysToUnlock();
-                if (days > 0) {
-                    return false;
-                } else {
-                    lesson.setDaysToUnlock(days);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

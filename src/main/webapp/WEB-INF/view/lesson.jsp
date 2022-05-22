@@ -22,6 +22,11 @@
 </head>
 
 <style>
+    .nav_buttons {
+        display: flex;
+        padding-bottom: 20px;
+    }
+
     h2 {
         text-align: center;
     }
@@ -37,10 +42,11 @@
     }
 
     .btn_positive {
-        margin: 0;
+        margin: auto;
         padding: 10px;
         text-decoration: none;
-        width: 100px;
+        width: min-content;
+        white-space: nowrap;
         text-align: center;
     }
 
@@ -71,6 +77,11 @@
         <jsp:include page="samples/header.jsp"/>
         <div class="main_content">
             <jsp:include page="samples/head_desk.jsp"/>
+            <div class="nav_buttons">
+                <a href="#" class="btn_positive">< Пред.</a>
+                <a href="<c:url value="/courses/" /><c:out value="${requestScope.courseId}"/>" class="btn_positive">Список уроков</a>
+                <a href="#" class="btn_positive">След. ></a>
+            </div>
             <div class="main">
                 <h2><c:out value="${requestScope.lesson.name}"/></h2>
                 <div class="lesson_desc">
