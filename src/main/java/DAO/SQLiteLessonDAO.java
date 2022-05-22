@@ -42,7 +42,7 @@ public class SQLiteLessonDAO implements LessonDAO {
             LocalDate now = java.time.LocalDate.now();
             LocalDate start = LocalDate.parse(foundUserCourse.getStartDate());
             while (resultSet.next()) {
-                LocalDate unlockDate = start.plusDays(currentNum*Lesson.PERIOD);
+                LocalDate unlockDate = start.plusDays(currentNum * Lesson.PERIOD);
                 Lesson lesson = new Lesson(
                         resultSet.getInt("id"),
                         resultSet.getInt("course"),
@@ -50,7 +50,7 @@ public class SQLiteLessonDAO implements LessonDAO {
                         resultSet.getString("desc"),
                         resultSet.getString("url"),
                         ChronoUnit.DAYS.between(now, unlockDate)
-                        );
+                );
                 lst.add(lesson);
                 currentNum++;
             }
@@ -59,5 +59,51 @@ public class SQLiteLessonDAO implements LessonDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Lesson getAvailableLesson(int userId, int lessonId) {
+        try {
+            Connection connection = SQLiteDAOFactory.getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "SELECT * FROM lessons WHERE id = ?");
+            pStatement.setObject(1, lessonId);
+            ResultSet resultSet = pStatement.executeQuery();
+            /* if lesson is not found */
+            if (!resultSet.next()) {
+                return null;
+            }
+            int courseId = resultSet.getInt("course");
+            Lesson lesson = new Lesson(
+                    resultSet.getInt("id"),
+                    courseId,
+                    resultSet.getString("name"),
+                    resultSet.getString("desc"),
+                    resultSet.getString("url"),
+                    0
+            );
+            if (isLessonAvailable(userId, lesson)) {
+                return lesson;
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean isLessonAvailable(int userId, Lesson lesson) {
+        ArrayList<Lesson> availableLessons = getAvailableLessons(userId, lesson.getCourse());
+        for (Lesson lesson1 : availableLessons) {
+            if (lesson1.getId() == lesson.getId()) {
+                long days = lesson1.getDaysToUnlock();
+                if (days > 0) {
+                    return false;
+                } else {
+                    lesson.setDaysToUnlock(days);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

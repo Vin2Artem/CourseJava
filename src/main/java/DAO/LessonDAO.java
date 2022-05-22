@@ -12,5 +12,7 @@ public interface LessonDAO {
     //boolean updateUserCourse(UserCourse userCourse);
     //UserCourse findUserCourse(int userId);
     ArrayList<Lesson> getAvailableLessons(int userId, int courseId);
+    Lesson getAvailableLesson(int userId, int lessonId);
+    boolean isLessonAvailable(int userId, Lesson lesson);
     //ArrayList<UserCourse> getAllUserCourses();
 }
