@@ -6,20 +6,20 @@ public class Feedback {
     private int id;
     private int user;
     private String topic;
-    private String desk;
+    private String desc;
 
     public String toString() {
         return this.getId() + " | " +
                 this.getUser() + " | " +
                 this.getTopic() + " | " +
-                this.getDesk();
+                this.getDesc();
     }
 
     public Feedback(int id, int user, String topic, String desk) {
         this.setId(id);
         this.setUser(user);
         this.setTopic(topic);
-        this.setDesk(desk);
+        this.setDesc(desk);
     }
 
     public int getId() {
@@ -46,11 +46,11 @@ public class Feedback {
         this.topic = topic;
     }
 
-    public String getDesk() {
-        return desk;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDesk(String desk) {
-        this.desk = desk;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

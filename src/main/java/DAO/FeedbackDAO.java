@@ -9,4 +9,5 @@ public interface FeedbackDAO {
     int ALREADY_IS = -2;
 
     int insertFeed(Feedback feedback);
+    ArrayList<Feedback> getAllFeeds();
 }

@@ -11,6 +11,7 @@ public interface UserDAO {
     int insertUser(User user);
     boolean deleteUser(int id);
     boolean updateUser(User user);
+    User findUser(int userId);
     User findUser(String email, String password);
     ArrayList<User> getAllUsers();
 }

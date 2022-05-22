@@ -127,4 +127,13 @@ public class SQLiteUserDAO implements UserDAO {
             return null;
         }
     }
+
+    public User findUser(int userId) {
+        ArrayList<User> users = getAllUsers();
+        for (User user : users) {
+            if (user.getId() == userId)
+                return user;
+        }
+        return null;
+    }
 }

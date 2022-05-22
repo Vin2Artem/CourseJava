@@ -26,6 +26,34 @@
         min-height: 154px;
     }
 
+    .btn_positive {
+        text-decoration: none;
+        width: min-content;
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    tr {
+        display: flex;
+        line-height: 1.5;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        flex-direction: column;
+    }
+
+    th, td {
+        padding: 3px 0;
+    }
+
     @media only screen and (max-width: 450px) {
         .main {
             padding: 0;
@@ -41,31 +69,52 @@
 
 <body>
 <div class="content">
-    <jsp:include page="samples/aside.jsp" />
+    <jsp:include page="samples/aside.jsp"/>
     <main>
-        <jsp:include page="samples/header.jsp" />
+        <jsp:include page="samples/header.jsp"/>
         <div class="main_content">
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
-                <form action="" method="post">
-                    <div class="container signup">
-                        <label for="topic" class="bold">Тема</label>
-                        <input type="text" placeholder="Вопрос, предложение или проблема" id="topic" name="topic" required>
+                <c:if test="${sessionScope.user.editor == false}">
+                    <form action="" method="post">
+                        <div class="container signup">
+                            <label for="topic" class="bold">Тема</label>
+                            <input type="text" placeholder="Вопрос, предложение или проблема" id="topic" name="topic"
+                                   required>
 
-                        <label for="desk" class="bold">Описание</label>
-                        <textarea id="desk" name="desk" placeholder="Детали вашей ситуации" required></textarea>
+                            <label for="desk" class="bold">Описание</label>
+                            <textarea id="desk" name="desk" placeholder="Детали вашей ситуации" required></textarea>
 
-                        <hr>
+                            <hr>
 
-                        <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
-                        <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
+                            <label for="answer" class="bold"><c:out value="${sessionScope.question}"/></label>
+                            <input type="text" maxlength="5" placeholder="123" id="answer" name="answer" required>
 
-                        <button type="submit" class="btn_positive">Отправить</button>
-                    </div>
-                </form>
+                            <button type="submit" class="btn_positive">Отправить</button>
+                        </div>
+                    </form>
+                </c:if>
+                <c:if test="${sessionScope.user.editor == true}">
+                    <table>
+                        <tbody>
+                        <c:forEach var="feedback" items="${requestScope.feedbacks}">
+                            <tr>
+                                <td class="feedack_user"><c:out value="${feedback.user.surname}"/> <c:out
+                                        value="${feedback.user.name}"/> <c:out
+                                        value="${feedback.user.patronymic}"/>, <c:out value="${feedback.user.email}"/></td>
+                                <td class="feedack_topic bold"><c:out value="${feedback.topic}"/></td>
+                                <td class="feedack_desc"><c:out value="${feedback.desc}"/></td>
+                                <td class="lesson_go"><a
+                                        href="<c:url value="/lessons/" /><c:out value="${feedback.id}" />"
+                                        class="btn_positive">Обработано</a></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
             </div>
         </div>
-        <jsp:include page="samples/footer.jsp" />
+        <jsp:include page="samples/footer.jsp"/>
     </main>
 </div>
 </body>
