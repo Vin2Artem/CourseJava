@@ -64,7 +64,7 @@ public class LessonsServlet extends HttpServlet {
 
         req.setAttribute("prevId", lessonDAO.getPrevAvailableLesson(user.getId(), lesson).getId());
         req.setAttribute("courseId", courseId);
-        req.setAttribute("nextId", lessonDAO.getPrevAvailableLesson(user.getId(), lesson).getId());
+        req.setAttribute("nextId", lessonDAO.getNextAvailableLesson(user.getId(), lesson).getId());
         req.setAttribute("lesson", lesson);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_lessons).forward(req, resp);

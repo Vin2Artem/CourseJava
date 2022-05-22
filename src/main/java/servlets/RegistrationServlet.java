@@ -74,7 +74,8 @@ public class RegistrationServlet extends HttpServlet {
                     req.getParameter("email"),
                     BCrypt.hashpw(req.getParameter("pwd"), BCrypt.gensalt(12)),
                     req.getParameter("tel"),
-                    req.getParameter("city"));
+                    req.getParameter("city"),
+                    false);
             int id = userDAO.insertUser(user);
             if (id == userDAO.INSERT_ERROR) {
                 req.setAttribute("title", "Ошибка регистрации");

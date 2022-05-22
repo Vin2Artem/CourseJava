@@ -13,6 +13,7 @@ public class User {
     private String password;
     private String phone;
     private String city;
+    private Boolean isEditor;
 
     public String toString() {
         return this.id + " | " +
@@ -24,10 +25,11 @@ public class User {
                 this.email + " | " +
                 this.password + " | " +
                 this.phone + " | " +
-                this.city;
+                this.city + " | " +
+                this.getEditor();
     }
 
-    public User (int id, String surname, String name, String patronymic, boolean sex, String birth, String email, String password, String phone, String city) {
+    public User (int id, String surname, String name, String patronymic, boolean sex, String birth, String email, String password, String phone, String city, Boolean isEditor) {
         this.setId(id);
         this.setSurname(surname);
         this.setName(name);
@@ -38,9 +40,10 @@ public class User {
         this.setPassword(password);
         this.setPhone(phone);
         this.setCity(city);
+        this.setEditor(isEditor);
     }
 
-    public User (int id, String surname, String name, String patronymic, String sex, String birth, String email, String password, String phone, String city) throws RuntimeException {
+    public User (int id, String surname, String name, String patronymic, String sex, String birth, String email, String password, String phone, String city, Boolean isEditor) throws RuntimeException {
         switch (sex) {
             case "мужской":
                 this.setSex(true);
@@ -60,6 +63,7 @@ public class User {
         this.setPassword(password);
         this.setPhone(phone);
         this.setCity(city);
+        this.setEditor(isEditor);
     }
 
     public int getId() {
@@ -140,5 +144,13 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Boolean getEditor() {
+        return isEditor;
+    }
+
+    public void setEditor(Boolean editor) {
+        isEditor = editor;
     }
 }
