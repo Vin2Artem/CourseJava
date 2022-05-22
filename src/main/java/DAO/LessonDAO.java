@@ -16,5 +16,6 @@ public interface LessonDAO {
     Lesson getLessonById(User user, int lessonId);
     Lesson getNextAvailableLesson(User user, Lesson lesson);
     Lesson getPrevAvailableLesson(User user, Lesson lesson);
+    boolean editLesson(int courseId, String lessonDesc, String url);
     //ArrayList<UserCourse> getAllUserCourses();
 }

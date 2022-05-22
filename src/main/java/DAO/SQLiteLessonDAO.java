@@ -139,4 +139,21 @@ public class SQLiteLessonDAO implements LessonDAO {
         }
         return null;
     }
+
+    public boolean editLesson(int courseId, String lessonDesc, String url) {
+        try {
+            Connection connection = SQLiteDAOFactory.getConnection();
+
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "UPDATE lessons SET desc = ?, url = ? WHERE id = ?");
+            pStatement.setObject(1, lessonDesc);
+            pStatement.setObject(2, url);
+            pStatement.setObject(3, courseId);
+            pStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

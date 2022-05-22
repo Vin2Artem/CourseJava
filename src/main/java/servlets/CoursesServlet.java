@@ -83,6 +83,8 @@ public class CoursesServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         if (courseDAO.editCourse(courseId, req.getParameter("desc"))) {
             req.setAttribute("success", true);
+        } else {
+            req.setAttribute("success", false);
         }
         doGet(req, resp);
     }

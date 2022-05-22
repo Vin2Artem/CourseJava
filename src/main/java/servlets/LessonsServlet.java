@@ -1,5 +1,6 @@
 package servlets;
 
+import DAO.CourseDAO;
 import DAO.LessonDAO;
 import DAO.SQLiteDAOFactory;
 import models.Lesson;
@@ -16,16 +17,6 @@ public class LessonsServlet extends HttpServlet {
     private static final String jsp_lessons = "/WEB-INF/view/lesson.jsp";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        lesson(req, resp);
-    }
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        lesson(req, resp);
-    }
-
-    protected void lesson(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
@@ -68,5 +59,36 @@ public class LessonsServlet extends HttpServlet {
         req.setAttribute("lesson", lesson);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_lessons).forward(req, resp);
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect(url_login);
+            return;
+        }
+        /* check usual user */
+        if (!user.getEditor()) {
+            resp.sendRedirect(url_student);
+            return;
+        }
+        /* id filter */
+        String uri = req.getRequestURI().substring(9);
+        if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
+            resp.sendRedirect(url_student);
+            return;
+        }
+        int lessonId = Integer.parseInt(uri);
+        SQLiteDAOFactory sqLiteDAOFactory = new SQLiteDAOFactory();
+        LessonDAO lessonDAO = sqLiteDAOFactory.getLessonDAO();
+        req.setCharacterEncoding("UTF-8");
+        if (lessonDAO.editLesson(lessonId, req.getParameter("desc"), req.getParameter("url"))) {
+            req.setAttribute("success", true);
+        } else {
+            req.setAttribute("success", false);
+        }
+        doGet(req, resp);
     }
 }

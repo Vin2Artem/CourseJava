@@ -31,6 +31,25 @@
         text-align: center;
     }
 
+    .desc_edit {
+        font-size: 16px;
+        line-height: 1.5;
+        min-height: 250px;
+        margin: 15px;
+        min-width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
+
+    input.url_edit {
+        margin: 5px 15px 20px;
+        width: calc(100% - 30px);
+        font-size: 16px;
+    }
+
+    button[type="submit"] {
+        margin: 0 auto 10px;
+    }
+
     .lesson_desc {
         margin: 15px;
         text-indent: 1em;
@@ -70,6 +89,18 @@
     }
 </style>
 
+<c:if test="${requestScope.success == true}">
+    <script>
+        alert("Успешно отредактировано!");
+    </script>
+</c:if>
+
+<c:if test="${requestScope.success == false}">
+    <script>
+        alert("Что-то пошло не так!");
+    </script>
+</c:if>
+
 <body>
 <div class="content">
     <jsp:include page="samples/aside.jsp"/>
@@ -78,15 +109,31 @@
         <div class="main_content">
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="nav_buttons">
-                <a href="<c:url value="/lessons/" /><c:out value="${requestScope.prevId}"/>" class="btn_positive">< Пред.</a>
-                <a href="<c:url value="/courses/" /><c:out value="${requestScope.courseId}"/>" class="btn_positive">Список уроков</a>
-                <a href="<c:url value="/lessons/" /><c:out value="${requestScope.nextId}"/>" class="btn_positive">След. ></a>
+                <a href="<c:url value="/lessons/" /><c:out value="${requestScope.prevId}"/>" class="btn_positive"><
+                    Пред.</a>
+                <a href="<c:url value="/courses/" /><c:out value="${requestScope.courseId}"/>" class="btn_positive">Список
+                    уроков</a>
+                <a href="<c:url value="/lessons/" /><c:out value="${requestScope.nextId}"/>" class="btn_positive">След.
+                    ></a>
             </div>
             <div class="main">
                 <h2><c:out value="${requestScope.lesson.name}"/></h2>
-                <div class="lesson_desc">
-                    <c:out value="${requestScope.lesson.desc}"/>
-                </div>
+                <c:if test="${sessionScope.user.editor == true}">
+                    <form action="" method="post">
+                    <textarea name="desc" id="area_desc" class="desc_edit"><c:forEach var="string"
+                                                                                      items="${requestScope.lesson.desc}"><c:out
+                            value="${string}"/></c:forEach></textarea>
+                        <label for="area_desc"></label>
+                        <input type="text" class="url_edit" id="inp_url" name="url" value="<c:out value="${requestScope.lesson.url}"/>">
+                        <label for="inp_url"></label>
+                        <button type="submit" class="btn_positive">Сохранить</button>
+                    </form>
+                </c:if>
+                <c:if test="${sessionScope.user.editor == false}">
+                    <div class="lesson_desc">
+                        <c:out value="${requestScope.lesson.desc}"/>
+                    </div>
+                </c:if>
                 <div>
                     <iframe src="<c:out value="${requestScope.lesson.url}"/>"
                             title="YouTube video player"
