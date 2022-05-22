@@ -13,5 +13,7 @@ public interface LessonDAO {
     //UserCourse findUserCourse(int userId);
     ArrayList<Lesson> getLessonsOfCourse(int userId, int courseId);
     Lesson getLessonById(int userId, int lessonId);
+    Lesson getNextAvailableLesson(int userId, Lesson lesson);
+    Lesson getPrevAvailableLesson(int userId, Lesson lesson);
     //ArrayList<UserCourse> getAllUserCourses();
 }

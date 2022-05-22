@@ -78,9 +78,9 @@
         <div class="main_content">
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="nav_buttons">
-                <a href="#" class="btn_positive">< Пред.</a>
+                <a href="<c:url value="/lessons/" /><c:out value="${requestScope.prevId}"/>" class="btn_positive">< Пред.</a>
                 <a href="<c:url value="/courses/" /><c:out value="${requestScope.courseId}"/>" class="btn_positive">Список уроков</a>
-                <a href="#" class="btn_positive">След. ></a>
+                <a href="<c:url value="/lessons/" /><c:out value="${requestScope.nextId}"/>" class="btn_positive">След. ></a>
             </div>
             <div class="main">
                 <h2><c:out value="${requestScope.lesson.name}"/></h2>

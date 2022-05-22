@@ -94,4 +94,45 @@ public class SQLiteLessonDAO implements LessonDAO {
             return null;
         }
     }
+
+    public Lesson getNextAvailableLesson(int userId, Lesson lesson) {
+        ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(userId, lesson.getCourse());
+        ArrayList<Lesson> availableLessons = new ArrayList<>();
+        for (Lesson l : lessonsOfCourse) {
+            if (l.getDaysToUnlock() <= 0) {
+                availableLessons.add(l);
+            }
+        }
+        boolean isFound = false;
+        for (Lesson l : availableLessons) {
+            if (isFound) {
+                return l;
+            }
+            if (l.getId() == lesson.getId()) {
+                isFound = true;
+            }
+        }
+        if (isFound) {
+            return availableLessons.get(0);
+        }
+        return null;
+    }
+
+    public Lesson getPrevAvailableLesson(int userId, Lesson lesson) {
+        ArrayList<Lesson> lessonsOfCourse = getLessonsOfCourse(userId, lesson.getCourse());
+        ArrayList<Lesson> availableLessons = new ArrayList<>();
+        for (Lesson l : lessonsOfCourse) {
+            if (l.getDaysToUnlock() <= 0) {
+                availableLessons.add(l);
+            }
+        }
+        Lesson prev = availableLessons.get(availableLessons.size() - 1);
+        for (Lesson l : availableLessons) {
+            if (l.getId() == lesson.getId()) {
+                return prev;
+            }
+            prev = l;
+        }
+        return null;
+    }
 }
