@@ -5,18 +5,24 @@ public class Course {
 
     private int id;
     private String name;
-    private String desk;
+    private String[] desc;
 
     public String toString() {
         return this.getId() + " | " +
                 this.getName() + " | " +
-                this.getDesk();
+                this.getDescOne();
     }
 
-    public Course(int id, String name, String desk) {
+    public Course(int id, String name, String desc) {
         this.setId(id);
         this.setName(name);
-        this.setDesk(desk);
+        this.setDesc(desc);
+    }
+
+    public Course(int id, String name, String[] desc) {
+        this.setId(id);
+        this.setName(name);
+        this.setDesc(desc);
     }
 
     public int getId() {
@@ -35,11 +41,19 @@ public class Course {
         this.name = name;
     }
 
-    public String getDesk() {
-        return desk;
+    public String[] getDesc() {
+        return desc;
     }
 
-    public void setDesk(String desk) {
-        this.desk = desk;
+    public String getDescOne() {
+        return String.join("\\n", desc);
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc.split("\n");
+    }
+
+    public void setDesc(String[] desc) {
+        this.desc = desc;
     }
 }

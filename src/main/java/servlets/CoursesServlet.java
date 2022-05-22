@@ -1,8 +1,10 @@
 package servlets;
 
+import DAO.CourseDAO;
 import DAO.LessonDAO;
 import DAO.SQLiteDAOFactory;
 import log.MyLog;
+import models.Course;
 import models.Lesson;
 import models.User;
 
@@ -16,9 +18,9 @@ import java.util.ArrayList;
 
 public class CoursesServlet extends HttpServlet {
 
-    private static final String jsp_student = "/WEB-INF/view/main.jsp";
-    private static final String jsp_courses = "/WEB-INF/view/courses.jsp";
+    private static final String url_student = "/main";
     private static final String url_login = "/login";
+    private static final String jsp_courses = "/WEB-INF/view/courses.jsp";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -40,14 +42,26 @@ public class CoursesServlet extends HttpServlet {
         }
         String uri = req.getRequestURI().substring(9);
         if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
-            resp.sendRedirect(url_login);
+            resp.sendRedirect(url_student);
             return;
         }
+        int courseId = Integer.parseInt(uri);
+
+        /* get course */
         SQLiteDAOFactory sqLiteDAOFactory = new SQLiteDAOFactory();
+        CourseDAO courseDAO = sqLiteDAOFactory.getCourseDAO();
+        Course course = courseDAO.findCourse(courseId);
+        if (course == null) {
+            resp.sendRedirect(url_student);
+            return;
+        }
+        req.setAttribute("course", course);
+
+        /* get lessons */
         LessonDAO lessonDAO = sqLiteDAOFactory.getLessonDAO();
-        ArrayList<Lesson> lst = lessonDAO.getAvailableLessons(user.getId(), Integer.parseInt(uri));
+        ArrayList<Lesson> lst = lessonDAO.getAvailableLessons(user.getId(), courseId);
         if (lst == null) {
-            resp.sendRedirect(url_login);
+            resp.sendRedirect(url_student);
             return;
         }
         for (Lesson lesson : lst) {

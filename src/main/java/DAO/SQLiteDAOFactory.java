@@ -27,4 +27,8 @@ public class SQLiteDAOFactory extends DAOFactory {
     public SQLiteLessonDAO getLessonDAO() {
         return new SQLiteLessonDAO();
     }
+
+    public SQLiteCourseDAO getCourseDAO() {
+        return new SQLiteCourseDAO();
+    }
 }

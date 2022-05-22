@@ -39,7 +39,7 @@
                 </li>
                 <li>
                     <div class="course">
-                        <a href="<c:url value="/courses/1" />" class="course_name">
+                        <a href="<c:url value="/courses/2" />" class="course_name">
                             <span>Курс "Прорыв"</span>
                             <div class="course_fol">
                                 <img class="firstimg" src="<c:url value="/pictures/arrow_white.png" />" alt="Go">

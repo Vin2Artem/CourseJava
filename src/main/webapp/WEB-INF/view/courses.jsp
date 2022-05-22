@@ -28,7 +28,12 @@
         }
     }
 
+    .main {
+        padding-top: 0;
+    }
+
     h2 {
+        padding-top: 25px;
         text-align: center;
     }
 
@@ -36,6 +41,10 @@
         margin: 15px;
         text-indent: 1em;
         line-height: 1.5;
+    }
+
+    .course_desc > p {
+        margin: 7px 0;
     }
 
     thead {
@@ -73,22 +82,24 @@
     }
 
     td,
-    th{
+    th {
         padding: 15px;
     }
 </style>
 
 <body>
 <div class="content">
-    <jsp:include page="samples/aside.jsp" />
+    <jsp:include page="samples/aside.jsp"/>
     <main>
-        <jsp:include page="samples/header.jsp" />
+        <jsp:include page="samples/header.jsp"/>
         <div class="main_content">
             <jsp:include page="samples/head_desk.jsp"/>
             <div class="main">
-                <h2>Название курса</h2>
+                <h2>Курс "<c:out value="${requestScope.course.name}"/>"</h2>
                 <div class="course_desc">
-                    <p>Описание курса</p>
+                    <c:forEach var="string" items="${requestScope.course.desc}">
+                        <p><c:out value="${string}"/></p>
+                    </c:forEach>
                 </div>
                 <table>
                     <thead>
@@ -101,13 +112,17 @@
                     <tbody>
                     <c:forEach var="lesson" items="${requestScope.lessons}">
                         <tr>
-                            <td class="lesson_name"><c:out value="${lesson.name}" /></td>
-                            <td class="lesson_desc"><c:out value="${lesson.desc}" /></td>
+                            <td class="lesson_name"><c:out value="${lesson.name}"/></td>
+                            <td class="lesson_desc"><c:out value="${lesson.desc}"/></td>
                             <c:if test="${lesson.daysToUnlock <= 0}">
-                                <td class="lesson_go"><a href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />" class="btn_positive">Открыть</a></td>
+                                <td class="lesson_go"><a
+                                        href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />"
+                                        class="btn_positive">Открыть</a></td>
                             </c:if>
                             <c:if test="${lesson.daysToUnlock > 0}">
-                                <td class="lesson_go"><div class="btn_positive"><c:out value="${lesson.daysToUnlock}" /> дн.</div></td>
+                                <td class="lesson_go">
+                                    <div class="btn_positive"><c:out value="${lesson.daysToUnlock}"/> дн.</div>
+                                </td>
                             </c:if>
                         </tr>
                     </c:forEach>
@@ -115,7 +130,7 @@
                 </table>
             </div>
         </div>
-        <jsp:include page="samples/footer.jsp" />
+        <jsp:include page="samples/footer.jsp"/>
     </main>
 </div>
 </body>
