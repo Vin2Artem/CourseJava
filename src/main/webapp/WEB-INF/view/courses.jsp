@@ -22,12 +22,6 @@
 </head>
 
 <style>
-    @media only screen and (max-width: 450px) {
-        .main {
-            padding: 0;
-        }
-    }
-
     .main {
         padding-top: 0;
     }
@@ -84,6 +78,44 @@
     td,
     th {
         padding: 15px;
+    }
+
+    @media only screen and (max-width: 450px) {
+        .main {
+            padding: 0;
+        }
+    }
+
+    @media only screen and (max-width: 750px) {
+        .main {
+            padding: 0;
+        }
+
+        table {
+            padding: 0 15px 15px;
+        }
+
+        thead {
+            display: none;
+        }
+
+        tr {
+            flex-direction: column;
+        }
+
+        th, td {
+            padding: 2.5px 0;
+        }
+
+        .lesson_name {
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .btn_positive {
+            margin: 3px auto 8px;
+        }
     }
 </style>
 

@@ -1,8 +1,6 @@
 package DAO;
 
 import models.Course;
-import models.Feedback;
-import models.User;
 
 import java.sql.*;
 
