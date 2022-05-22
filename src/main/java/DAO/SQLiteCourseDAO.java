@@ -30,6 +30,21 @@ public class SQLiteCourseDAO implements CourseDAO {
             e.printStackTrace();
             return null;
         }
+    }
 
+    public boolean editCourse(int courseId, String courseDesc) {
+        try {
+            Connection connection = SQLiteDAOFactory.getConnection();
+
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "UPDATE courses SET desc = ? WHERE id = ?");
+            pStatement.setObject(1, courseDesc);
+            pStatement.setObject(2, courseId);
+            pStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -11,6 +11,7 @@ public interface CourseDAO {
     //boolean deleteUserCourse(int id);
     //boolean updateUserCourse(UserCourse userCourse);
     Course findCourse(int courseId);
+    boolean editCourse(int courseId, String courseDesc);
     //ArrayList<Course> getAvailableLessons(int userId, int courseId);
     //ArrayList<UserCourse> getAllUserCourses();
 }

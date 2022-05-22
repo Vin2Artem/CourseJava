@@ -33,7 +33,7 @@
     }
 </style>
 
-<c:if test="${requestScope.success == 1}">
+<c:if test="${requestScope.success == true}">
     <script>
         alert("Успешно отправлено!");
     </script>

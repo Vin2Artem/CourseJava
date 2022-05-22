@@ -45,7 +45,7 @@ public class FeedbackServlet extends HttpServlet {
         // Captcha check
         req.setCharacterEncoding("UTF-8");
         String right = session.getAttribute("answer").toString();
-        String given = req.getParameter("answer").toString();
+        String given = req.getParameter("answer");
         if (!right.equals(given)) {
             req.setAttribute("title", "Ошибка входа");
             req.setAttribute("message", "Каптча введена неверно!");
@@ -70,7 +70,7 @@ public class FeedbackServlet extends HttpServlet {
         }
         if (id != feedbackDAO.ALREADY_IS) {
             MyLog.Msg("Feedback added: " + feedback.toString());
-            req.setAttribute("success", 1);
+            req.setAttribute("success", true);
         }
         feedback.setId(id);
         doGet(req, resp);

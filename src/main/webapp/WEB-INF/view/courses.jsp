@@ -35,6 +35,10 @@
         max-width: calc(100% - 30px);
     }
 
+    button[type="submit"] {
+        margin: 0 auto;
+    }
+
     .course_desc {
         margin: 15px;
         text-indent: 1em;
@@ -121,6 +125,18 @@
     }
 </style>
 
+<c:if test="${requestScope.success == true}">
+    <script>
+        alert("Успешно отредактировано!");
+    </script>
+</c:if>
+
+<c:if test="${requestScope.success == false}">
+    <script>
+        alert("Что-то пошло не так!");
+    </script>
+</c:if>
+
 <body>
 <div class="content">
     <jsp:include page="samples/aside.jsp"/>
@@ -131,9 +147,13 @@
             <div class="main">
                 <h2>Курс "<c:out value="${requestScope.course.name}"/>"</h2>
                 <c:if test="${sessionScope.user.editor == true}">
-                    <textarea id="area_desk" class="desc_edit"><c:forEach var="string" items="${requestScope.course.desc}"><c:out
+                    <form action="" method="post">
+                    <textarea name="desc" id="area_desk" class="desc_edit"><c:forEach var="string"
+                                                                          items="${requestScope.course.desc}"><c:out
                             value="${string}"/></c:forEach></textarea>
-                    <label for="area_desk"></label>
+                        <label for="area_desk"></label>
+                        <button type="submit" class="btn_positive">Сохранить</button>
+                    </form>
                 </c:if>
                 <c:if test="${sessionScope.user.editor == false}">
                     <div class="course_desc">

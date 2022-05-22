@@ -3,7 +3,6 @@ package servlets;
 import DAO.CourseDAO;
 import DAO.LessonDAO;
 import DAO.SQLiteDAOFactory;
-import log.MyLog;
 import models.Course;
 import models.Lesson;
 import models.User;
@@ -23,16 +22,6 @@ public class CoursesServlet extends HttpServlet {
     private static final String jsp_courses = "/WEB-INF/view/courses.jsp";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        course(req, resp);
-    }
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        course(req, resp);
-    }
-
-    protected void course(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
@@ -67,5 +56,34 @@ public class CoursesServlet extends HttpServlet {
         req.setAttribute("lessons", lst);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_courses).forward(req, resp);
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect(url_login);
+            return;
+        }
+        /* check usual user */
+        if (!user.getEditor()) {
+            resp.sendRedirect(url_student);
+            return;
+        }
+        /* id filter */
+        String uri = req.getRequestURI().substring(9);
+        if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
+            resp.sendRedirect(url_student);
+            return;
+        }
+        int courseId = Integer.parseInt(uri);
+        SQLiteDAOFactory sqLiteDAOFactory = new SQLiteDAOFactory();
+        CourseDAO courseDAO = sqLiteDAOFactory.getCourseDAO();
+        req.setCharacterEncoding("UTF-8");
+        if (courseDAO.editCourse(courseId, req.getParameter("desc"))) {
+            req.setAttribute("success", true);
+        }
+        doGet(req, resp);
     }
 }
