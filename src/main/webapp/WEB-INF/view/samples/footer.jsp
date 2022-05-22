@@ -3,7 +3,7 @@
 <footer>
     <div class="feedback">
         <div class="btn_feedback">
-            <a href="feedback">Обратная связь</a>
+            <a href="<c:url value="/feedback" />">Обратная связь</a>
         </div>
     </div>
 </footer>
