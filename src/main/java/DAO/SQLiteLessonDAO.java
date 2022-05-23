@@ -34,9 +34,10 @@ public class SQLiteLessonDAO implements LessonDAO {
                     }
                 }
                 if (foundUserCourse == null) {
-                    return null;
+                    start = now.plusDays(1);
+                } else {
+                    start = LocalDate.parse(foundUserCourse.getStartDate());
                 }
-                start = LocalDate.parse(foundUserCourse.getStartDate());
             }
             Connection connection = SQLiteDAOFactory.getConnection();
             PreparedStatement pStatement = connection.prepareStatement(

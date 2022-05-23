@@ -149,7 +149,7 @@
                 <c:if test="${sessionScope.user.editor == true}">
                     <form action="" method="post">
                     <textarea name="desc" id="area_desk" class="desc_edit"><c:forEach var="string"
-                                                                          items="${requestScope.course.desc}"><c:out
+                                                                                      items="${requestScope.course.desc}"><c:out
                             value="${string}"/></c:forEach></textarea>
                         <label for="area_desk"></label>
                         <button type="submit" class="btn_positive">Сохранить</button>
@@ -182,7 +182,12 @@
                             </c:if>
                             <c:if test="${lesson.isUnlocked(sessionScope.user) == false}">
                                 <td class="lesson_go">
-                                    <div class="btn_positive"><c:out value="${lesson.daysToUnlock}"/> дн.</div>
+                                    <c:if test="${requestScope.courseLocked == false}">
+                                        <div class="btn_positive"><c:out value="${lesson.daysToUnlock}"/> дн.</div>
+                                    </c:if>
+                                    <c:if test="${requestScope.courseLocked == true}">
+                                        <div class="btn_positive">Закрыт</div>
+                                    </c:if>
                                 </td>
                             </c:if>
                         </tr>

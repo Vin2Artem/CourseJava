@@ -3,9 +3,11 @@ package servlets;
 import DAO.CourseDAO;
 import DAO.LessonDAO;
 import DAO.SQLiteDAOFactory;
+import DAO.SQLiteUserCourseDAO;
 import models.Course;
 import models.Lesson;
 import models.User;
+import models.UserCourse;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +55,22 @@ public class CoursesServlet extends HttpServlet {
             resp.sendRedirect(url_student);
             return;
         }
+
+        UserCourse foundUserCourse = null;
+        SQLiteUserCourseDAO sqLiteUserCourseDAO = new SQLiteUserCourseDAO();
+        ArrayList<UserCourse> availableUserCourses = sqLiteUserCourseDAO.getAvailableUserCourses(user.getId());
+        for (UserCourse availableUserCourse : availableUserCourses) {
+            if (availableUserCourse.getCourse() == courseId) {
+                foundUserCourse = availableUserCourse;
+                break;
+            }
+        }
+        if (foundUserCourse == null) {
+            req.setAttribute("courseLocked", true);
+        } else {
+            req.setAttribute("courseLocked", false);
+        }
+
         req.setAttribute("lessons", lst);
         // Add 2nd group (admin)
         req.getRequestDispatcher(jsp_courses).forward(req, resp);
