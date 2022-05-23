@@ -1,5 +1,9 @@
 package models;
 
+import DAO.SQLiteUserCourseDAO;
+
+import java.util.ArrayList;
+
 public class Lesson {
     /* Days to unlock next lesson */
     public static final int PERIOD = 7;
@@ -80,5 +84,18 @@ public class Lesson {
 
     public boolean isUnlocked(User user) {
         return getDaysToUnlock() <= 0 || user.getEditor();
+    }
+
+    public boolean isLocked(User user) {
+        UserCourse foundUserCourse = null;
+        SQLiteUserCourseDAO sqLiteUserCourseDAO = new SQLiteUserCourseDAO();
+        ArrayList<UserCourse> availableUserCourses = sqLiteUserCourseDAO.getAvailableUserCourses(user.getId());
+        for (UserCourse availableUserCourse : availableUserCourses) {
+            if (availableUserCourse.getCourse() == this.getCourse()) {
+                foundUserCourse = availableUserCourse;
+                break;
+            }
+        }
+        return foundUserCourse == null;
     }
 }

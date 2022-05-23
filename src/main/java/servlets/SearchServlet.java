@@ -65,7 +65,14 @@ public class SearchServlet extends HttpServlet {
         HashSet<Lesson> lessons = new HashSet<>();
         if (lessonDesc != null) {
             req.setAttribute("lessonDesc", true);
-            //lessons.addAll(lessonDAO.findLessons(search));
+            for (Course course : courseDAO.getAllCourses()) {
+                ArrayList<Lesson> temp = lessonDAO.getLessonsOfCourse(user, course.getId());
+                for (Lesson lesson : temp) {
+                    if (lesson.getDesc().toLowerCase().contains(search.toLowerCase())) {
+                        lessons.add(lesson);
+                    }
+                }
+            }
         } else {
             req.setAttribute("lessonDesc", false);
         }
@@ -74,6 +81,7 @@ public class SearchServlet extends HttpServlet {
         if (courses.size() == 0 && lessons.size() == 0) {
             req.setAttribute("notFound", true);
         }
+
         req.getRequestDispatcher(JSP_SEARCH).forward(req, resp);
     }
 }

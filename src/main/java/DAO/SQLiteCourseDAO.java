@@ -11,6 +11,27 @@ public class SQLiteCourseDAO implements CourseDAO {
         // инициализация
     }
 
+    public ArrayList<Course> getAllCourses() {
+        try {
+            Connection connection = SQLiteDAOFactory.getConnection();
+            ArrayList<Course> courses = new ArrayList<>();
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "SELECT * FROM courses");
+            ResultSet resultSet = pStatement.executeQuery();
+            while (resultSet.next()) {
+                courses.add(new Course(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("desc")
+                ));
+            }
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public Course findCourse(int courseId) {
         try {
             Connection connection = SQLiteDAOFactory.getConnection();

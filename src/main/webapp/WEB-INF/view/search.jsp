@@ -34,7 +34,7 @@
     }
 
     .search_param {
-         margin: 5px 10px;
+        margin: 5px 10px;
     }
 
     .btn_positive {
@@ -73,6 +73,15 @@
         padding: 3px 0;
     }
 
+    .btn_positive {
+        width: 100px;
+        text-align: center;
+    }
+
+    div.btn_positive {
+        background: gray;
+    }
+
     @media only screen and (max-width: 450px) {
         .main {
             padding: 0;
@@ -108,7 +117,12 @@
                             <label for="courseDesc">По описанию курсов</label>
                         </div>
                         <div class="search_param">
-                            <input type="checkbox" name="lessonDesc" id="lessonDesc">
+                            <c:if test="${requestScope.lessonDesc == true}">
+                                <input type="checkbox" name="lessonDesc" id="lessonDesc" checked>
+                            </c:if>
+                            <c:if test="${requestScope.lessonDesc == false}">
+                                <input type="checkbox" name="lessonDesc" id="lessonDesc">
+                            </c:if>
                             <label for="lessonDesc">По описанию уроков</label>
                         </div>
                     </div>
@@ -129,6 +143,29 @@
                             <td class="course_go"><a
                                     href="<c:url value="/courses/" /><c:out value="${course.id}" />"
                                     class="btn_positive">Перейти</a></td>
+                        </tr>
+                    </c:forEach>
+                    <c:forEach var="lesson" items="${requestScope.lessons}">
+                        <tr>
+                            <td class="course_title bold"><c:out value="${lesson.name}"/></td>
+                            <td>
+                                <p><c:out value="${lesson.desc}"/></p>
+                            </td>
+                            <c:if test="${lesson.isUnlocked(sessionScope.user) == true}">
+                                <td class="lesson_go"><a
+                                        href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />"
+                                        class="btn_positive">Открыть</a></td>
+                            </c:if>
+                            <c:if test="${lesson.isUnlocked(sessionScope.user) == false}">
+                                <td class="lesson_go">
+                                    <c:if test="${lesson.isLocked(sessionScope.user) == false}">
+                                        <div class="btn_positive"><c:out value="${lesson.daysToUnlock}"/> дн.</div>
+                                    </c:if>
+                                    <c:if test="${lesson.isLocked(sessionScope.user) == true}">
+                                        <div class="btn_positive">Закрыт</div>
+                                    </c:if>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
