@@ -94,6 +94,16 @@
         <url-pattern>/lessons/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>servlets.AccountServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/pictures/*</url-pattern>

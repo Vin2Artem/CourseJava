@@ -105,19 +105,21 @@ window.addEventListener("DOMContentLoaded", function () {
     });
 
     /* Спойлер */
-    const select = document.querySelector('.select');
-    const selectValue = document.querySelector('.select_value');
-    const selectDropdown = document.querySelector('.select_dropdown');
-    const sex = document.querySelector('#sex')
-    selectDropdown.addEventListener('click', e => {
-        const option = e.target.closest('.select_option');
-        if (option) {
-            selectValue.textContent = option.textContent;
-            e.target.closest('.select').blur()
-            select.dispatchEvent(new CustomEvent('change', { detail: option.textContent }))
-        }
-    })
-    select.addEventListener('change', e => sex.value = e.detail)
+    try {
+        const select = document.querySelector('.select');
+        const selectValue = document.querySelector('.select_value');
+        const selectDropdown = document.querySelector('.select_dropdown');
+        const sex = document.querySelector('#sex')
+        selectDropdown.addEventListener('click', e => {
+            const option = e.target.closest('.select_option');
+            if (option) {
+                selectValue.textContent = option.textContent;
+                e.target.closest('.select').blur()
+                select.dispatchEvent(new CustomEvent('change', {detail: option.textContent}))
+            }
+        })
+        select.addEventListener('change', e => sex.value = e.detail)
+    } catch (e) {}
 
     /* Проверка электронной почты */
     const emails = document.querySelectorAll('input[type=email]');

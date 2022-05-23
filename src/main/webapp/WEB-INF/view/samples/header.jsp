@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="account right">
-        <a href="<c:url value="/main/account"/>" class="btn_account">
+        <a href="<c:url value="/account"/>" class="btn_account">
             <span><c:out value="${sessionScope.user.email}"/></span>
         </a>
     </div>

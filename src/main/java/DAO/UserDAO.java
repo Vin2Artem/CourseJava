@@ -10,7 +10,7 @@ public interface UserDAO {
 
     int insertUser(User user);
     boolean deleteUser(int id);
-    boolean updateUser(User user);
+    boolean editUser(User user, String surname, String name, String patronymic, String email, String password, String phone, String city, Boolean isEditor);
     User findUser(int userId);
     User findUser(String email, String password);
     ArrayList<User> getAllUsers();

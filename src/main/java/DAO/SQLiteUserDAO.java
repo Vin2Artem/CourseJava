@@ -59,11 +59,36 @@ public class SQLiteUserDAO implements UserDAO {
         }
     }
 
-    public boolean updateUser(User user) {
-        // Реализовать здесь операцию обновления записи,
-        // используя данные из UserData Transfer Object
-        // Возвратить true при успешном выполнении, false при ошибке
-        return false;
+    public boolean editUser(User user, String surname, String name, String patronymic, String email, String password, String phone, String city, Boolean isEditor) {
+        user.setSurname(surname);
+        user.setName(name);
+        user.setPatronymic(patronymic);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+        user.setCity(city);
+        user.setEditor(isEditor);
+        try {
+            Connection connection = SQLiteDAOFactory.getConnection();
+
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "UPDATE users SET surname = ?, name = ?, patronymic = ?," +
+                            "email = ?, password = ?, phone = ?, city = ?, isEditor = ? WHERE id = ?");
+            pStatement.setObject(1, surname);
+            pStatement.setObject(2, name);
+            pStatement.setObject(3, patronymic);
+            pStatement.setObject(4, email);
+            pStatement.setObject(5, password);
+            pStatement.setObject(6, phone);
+            pStatement.setObject(7, city);
+            pStatement.setObject(8, isEditor);
+            pStatement.setObject(9, user.getId());
+            pStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public User findUser(String email, String password) {
@@ -76,17 +101,17 @@ public class SQLiteUserDAO implements UserDAO {
                 return null;
             }
             User user = new User(
-                resultSet.getInt("id"),
-                resultSet.getString("surname"),
-                resultSet.getString("name"),
-                resultSet.getString("patronymic"),
-                resultSet.getBoolean("sex"),
-                resultSet.getString("birth"),
-                resultSet.getString("email"),
-                resultSet.getString("password"),
-                resultSet.getString("phone"),
-                resultSet.getString("city"),
-                resultSet.getInt("isEditor") != 0
+                    resultSet.getInt("id"),
+                    resultSet.getString("surname"),
+                    resultSet.getString("name"),
+                    resultSet.getString("patronymic"),
+                    resultSet.getBoolean("sex"),
+                    resultSet.getString("birth"),
+                    resultSet.getString("email"),
+                    resultSet.getString("password"),
+                    resultSet.getString("phone"),
+                    resultSet.getString("city"),
+                    resultSet.getInt("isEditor") != 0
             );
             if (BCrypt.checkpw(password, user.getPassword())) {
                 return user;
@@ -117,7 +142,7 @@ public class SQLiteUserDAO implements UserDAO {
                         resultSet.getString("password"),
                         resultSet.getString("phone"),
                         resultSet.getString("city"),
-                    resultSet.getInt("isEditor") != 0
+                        resultSet.getInt("isEditor") != 0
                 );
                 lst.add(user);
             }
