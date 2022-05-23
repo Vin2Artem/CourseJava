@@ -12,6 +12,7 @@ public interface CourseDAO {
     //boolean updateUserCourse(UserCourse userCourse);
     Course findCourse(int courseId);
     boolean editCourse(int courseId, String courseDesc);
+    ArrayList<Course> findCourses(String desc);
     //ArrayList<Course> getAvailableLessons(int userId, int courseId);
     //ArrayList<UserCourse> getAllUserCourses();
 }

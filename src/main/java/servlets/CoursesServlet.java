@@ -19,21 +19,21 @@ import java.util.ArrayList;
 
 public class CoursesServlet extends HttpServlet {
 
-    private static final String url_student = "/main";
-    private static final String url_login = "/login";
-    private static final String jsp_courses = "/WEB-INF/view/courses.jsp";
+    private static final String URL_STUDENT = "/main";
+    private static final String URL_LOGIN = "/login";
+    private static final String JSP_COURSES = "/WEB-INF/view/courses.jsp";
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            resp.sendRedirect(url_login);
+            resp.sendRedirect(URL_LOGIN);
             return;
         }
         String uri = req.getRequestURI().substring(9);
         if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
-            resp.sendRedirect(url_student);
+            resp.sendRedirect(URL_STUDENT);
             return;
         }
         int courseId = Integer.parseInt(uri);
@@ -43,7 +43,7 @@ public class CoursesServlet extends HttpServlet {
         CourseDAO courseDAO = sqLiteDAOFactory.getCourseDAO();
         Course course = courseDAO.findCourse(courseId);
         if (course == null) {
-            resp.sendRedirect(url_student);
+            resp.sendRedirect(URL_STUDENT);
             return;
         }
         req.setAttribute("course", course);
@@ -52,7 +52,7 @@ public class CoursesServlet extends HttpServlet {
         LessonDAO lessonDAO = sqLiteDAOFactory.getLessonDAO();
         ArrayList<Lesson> lst = lessonDAO.getLessonsOfCourse(user, courseId);
         if (lst == null) {
-            resp.sendRedirect(url_student);
+            resp.sendRedirect(URL_STUDENT);
             return;
         }
 
@@ -73,7 +73,7 @@ public class CoursesServlet extends HttpServlet {
 
         req.setAttribute("lessons", lst);
         // Add 2nd group (admin)
-        req.getRequestDispatcher(jsp_courses).forward(req, resp);
+        req.getRequestDispatcher(JSP_COURSES).forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -81,18 +81,18 @@ public class CoursesServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            resp.sendRedirect(url_login);
+            resp.sendRedirect(URL_LOGIN);
             return;
         }
         /* check usual user */
         if (!user.getEditor()) {
-            resp.sendRedirect(url_student);
+            resp.sendRedirect(URL_STUDENT);
             return;
         }
         /* id filter */
         String uri = req.getRequestURI().substring(9);
         if (!uri.matches("[-+]?\\d+") || uri.length() >= 10 || Integer.parseInt(uri) <= 0) {
-            resp.sendRedirect(url_student);
+            resp.sendRedirect(URL_STUDENT);
             return;
         }
         int courseId = Integer.parseInt(uri);

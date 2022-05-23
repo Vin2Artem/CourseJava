@@ -15,14 +15,14 @@
                 <li>
                     <div class="course">
                         <div class="search">
-                            <div class="search-fol">
+                            <form class="search-fol" action="<c:url value="/search" />" method="get" onsubmit="return validateForm();">
                                 <input id="inp_search" type="text" class="search_input"
-                                       placeholder="Введите текст для поиска">
+                                       placeholder="Введите текст для поиска" name="search">
                                 <label for="inp_search"></label>
-                                <div class="search_img">
+                                <button class="search_img" type="submit">
                                     <img src="<c:url value="/pictures/search.png" />" alt="Search">
-                                </div>
-                            </div>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </li>
@@ -107,3 +107,14 @@
         </div>
     </nav>
 </aside>
+
+<script>
+    function validateForm() {
+        if (document.querySelector('#inp_search').value.trim() === "") {
+            alert("Введите поисковый запрос.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>

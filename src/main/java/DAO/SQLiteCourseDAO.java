@@ -3,6 +3,8 @@ package DAO;
 import models.Course;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class SQLiteCourseDAO implements CourseDAO {
     public SQLiteCourseDAO() {
@@ -45,6 +47,31 @@ public class SQLiteCourseDAO implements CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public ArrayList<Course> findCourses(String desc) {
+        try {
+            ArrayList<Course> courses = new ArrayList<>();
+
+            Connection connection = SQLiteDAOFactory.getConnection();
+
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "SELECT * FROM courses");
+            ResultSet resultSet = pStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getString("desc").toLowerCase().contains(desc.toLowerCase())) {
+                    courses.add(new Course(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("desc")
+                    ));
+                }
+            }
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
