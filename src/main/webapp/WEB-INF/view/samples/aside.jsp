@@ -50,7 +50,7 @@
                 </li>
                 <li>
                     <div class="course">
-                        <a href="<c:url value="/courses/1" />" class="course_name">
+                        <a href="#" class="course_name">
                             <span>Расписание ZOOM'ов</span>
                             <div class="course_fol">
                                 <img class="firstimg" src="<c:url value="/pictures/arrow_white.png" />" alt="Go">
@@ -72,7 +72,7 @@
                 </li>-->
                 <li>
                     <div class="course">
-                        <a href="<c:url value="/courses/1" />" class="course_name">
+                        <a href="#" class="course_name">
                             <span>О школе "Upgrader"</span>
                             <div class="course_fol">
                                 <img class="firstimg" src="<c:url value="/pictures/arrow_white.png" />" alt="Go">
@@ -83,8 +83,8 @@
                 </li>
                 <li>
                     <div class="course">
-                        <a href="<c:url value="/courses/1" />" class="course_name">
-                            <span>Контакты</span>
+                        <a href="<c:url value="/policy" />" class="course_name">
+                            <span>Юрид. информация</span>
                             <div class="course_fol">
                                 <img class="firstimg" src="<c:url value="/pictures/arrow_white.png" />" alt="Go">
                                 <img class="secondimg" src="<c:url value="/pictures/arrow.png" />" alt="Go">
@@ -94,7 +94,7 @@
                 </li>
                 <li>
                     <div class="course">
-                        <a href="<c:url value="/courses/1" />" class="course_name">
+                        <a href="#" class="course_name">
                             <span>F.A.Q.</span>
                             <div class="course_fol">
                                 <img class="firstimg" src="<c:url value="/pictures/arrow_white.png" />" alt="Go">

@@ -7,18 +7,25 @@
         <meta http-equiv="refresh" content="0;url=error?type=js&redir=/registration">
     </noscript>
     <meta charset="UTF-8">
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content='true' name='HandheldFriendly' />
-    <meta content='width' name='MobileOptimized' />
-    <meta content='yes' name='apple-mobile-web-app-capable' />
+    <meta content='true' name='HandheldFriendly'/>
+    <meta content='width' name='MobileOptimized'/>
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
     <title>Регистрация</title>
     <link rel="stylesheet" href="styles/general.css"/>
     <link rel="stylesheet" href="styles/style.css"/>
     <link rel="shortcut icon" href="pictures/logo.png" type="image/png">
     <script src="scripts/registration.js"></script>
 </head>
+
+<style>
+    .documents {
+        line-height: 1.5;
+        text-align: center;
+    }
+</style>
 
 <body>
 <div class="content">
@@ -29,7 +36,9 @@
             </div>
 
             <h1>Регистрация</h1>
-            <p>Заполните форму ниже, чтобы создать аккаунт.</p>
+            <p class="documents">Регистрируясь на портале и используя любые его материалы, вы принимаете нашу<br>
+                <a href="<c:url value="/policy"/>">Политику конфиденциальности</a>
+            </p>
 
             <hr>
 
@@ -57,7 +66,8 @@
             </div>
 
             <label for="birth" class="bold">Дата рождения</label>
-            <input type="date" min="1900-01-01" max="<c:out value="${requestScope.today}"/>" id="birth" name="birth" required>
+            <input type="date" min="1900-01-01" max="<c:out value="${requestScope.today}"/>" id="birth" name="birth"
+                   required>
 
             <hr>
 
@@ -68,11 +78,13 @@
             <span class="pop_msg">Формат адреса: something@mail.ru</span>
 
             <label for="pwd" class="bold">Пароль *</label>
-            <input type="password" class="pwd pop_field" minlength="6" placeholder="qW1!eR2@tY3#" id="pwd" name="pwd" required>
+            <input type="password" class="pwd pop_field" minlength="6" placeholder="qW1!eR2@tY3#" id="pwd" name="pwd"
+                   required>
             <span class="pop_msg">Длина пароля должна быть > 6 символов</span>
 
             <label for="pwd-repeat" class="bold">Повторите пароль *</label>
-            <input type="password" class="pwd_repeat pop_field" placeholder="qW1!eR2@tY3#" id="pwd-repeat" name="pwd-repeat" required>
+            <input type="password" class="pwd_repeat pop_field" placeholder="qW1!eR2@tY3#" id="pwd-repeat"
+                   name="pwd-repeat" required>
             <span class="pop_msg">Пароли не совпадают</span>
 
             <hr>
