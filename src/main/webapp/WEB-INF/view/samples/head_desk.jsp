@@ -3,7 +3,7 @@
 <div class="head_desc">
     <div class="welcome_text">
         <div class="welcome_logo">
-            <a href="<c:url value="/welcome"/>">
+            <a href="<c:url value="/main"/>">
                 <img class="welcome_img" src="<c:url value="/pictures/logo.png"/>" alt="Logo"/>
             </a>
         </div>
