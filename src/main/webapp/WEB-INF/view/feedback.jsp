@@ -101,12 +101,13 @@
                             <tr>
                                 <td class="feedack_user"><c:out value="${feedback.user.surname}"/> <c:out
                                         value="${feedback.user.name}"/> <c:out
-                                        value="${feedback.user.patronymic}"/>, <c:out value="${feedback.user.email}"/></td>
+                                        value="${feedback.user.patronymic}"/>, <c:out
+                                        value="${feedback.user.email}"/></td>
                                 <td class="feedack_topic bold"><c:out value="${feedback.topic}"/></td>
-                                <td class="feedack_desc"><c:out value="${feedback.desc}"/></td>
-                                <td class="lesson_go"><a
-                                        href="<c:url value="/lessons/" /><c:out value="${feedback.id}" />"
-                                        class="btn_positive">Обработано</a></td>
+                                <td class="feedack_desc"><c:out value="${feedback.desc}"/><hr></td>
+                                    <%-- <td class="lesson_go"><a
+                                            href="<c:url value="/lessons/" /><c:out value="${feedback.id}" />"
+                                            class="btn_positive">Обработано</a></td> --%>
                             </tr>
                         </c:forEach>
                         </tbody>
