@@ -50,6 +50,10 @@
         margin: 0 auto 10px;
     }
 
+    button.search_img {
+        margin: 0;
+    }
+
     .lesson_desc {
         margin: 15px;
         text-indent: 1em;
