@@ -73,6 +73,15 @@
         padding: 3px 0;
     }
 
+    .lesson_go {
+        display: flex;
+        justify-content: center;
+    }
+
+    .lesson_go > * {
+        margin: 8px;
+    }
+
     .btn_positive {
         width: 100px;
         text-align: center;
@@ -151,21 +160,22 @@
                             <td>
                                 <p><c:out value="${lesson.desc}"/></p>
                             </td>
-                            <c:if test="${lesson.isUnlocked(sessionScope.user) == true}">
-                                <td class="lesson_go"><a
-                                        href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />"
-                                        class="btn_positive">Открыть</a></td>
-                            </c:if>
-                            <c:if test="${lesson.isUnlocked(sessionScope.user) == false}">
-                                <td class="lesson_go">
+                            <td class="lesson_go">
+                                <c:if test="${lesson.isUnlocked(sessionScope.user) == true}">
+                                    <a href="<c:url value="/lessons/" /><c:out value="${lesson.id}" />"
+                                       class="btn_positive">Открыть</a>
+                                </c:if>
+                                <c:if test="${lesson.isUnlocked(sessionScope.user) == false}">
                                     <c:if test="${lesson.isLocked(sessionScope.user) == false}">
                                         <div class="btn_positive"><c:out value="${lesson.daysToUnlock}"/> дн.</div>
                                     </c:if>
                                     <c:if test="${lesson.isLocked(sessionScope.user) == true}">
                                         <div class="btn_positive">Закрыт</div>
                                     </c:if>
-                                </td>
-                            </c:if>
+                                </c:if>
+                                <a href="<c:url value="/courses/" /><c:out value="${lesson.course}" />"
+                                   class="btn_positive">К курсу</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
